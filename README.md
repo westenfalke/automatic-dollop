@@ -30,7 +30,7 @@ test/test_helper/
 ## No Feature
 - Analytics capabilities
 (
-    should be provided by your ISP, GDPR conform and exactly matched the kind of web server you are using
+    in my case my ISP provides GDPR conform analytics so I don't mind today
 )
 - Integrated search engine
 (
@@ -41,5 +41,5 @@ test/test_helper/
     there are already plenty of solutions out there
 )
 - Improved security features (
-    there is not a lot to improve on a static website, an SSL is a defacto standard and therefore no longer an usp
+    there is not a lot to improve on a static website, hence SSL is a defacto standard its's no longer a USP
 )
