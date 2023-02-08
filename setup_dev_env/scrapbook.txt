@@ -1,6 +1,9 @@
-# no longer needed # ~gmsl~ ~remake~ 
-# not yet # libxml2-utils ->  xmllint
-# not yet # sudo apt install 
+## depend
+- no longer needed # ~gmsl~ ~remake~ 
+- not yet # libxml2-utils ->  xmllint
+- not yet # sudo apt install 
+- [yq/yq](https://mikefarah.gitbook.io/yq/)
+``` docker
 {
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
@@ -12,7 +15,9 @@
   }
 }
 
+```
 
+``` bash
 test/test_helper/
 ├── bats-assert -> bats-assert-2.1.0
 ├── bats-assert-2.1.0
@@ -21,8 +26,9 @@ test/test_helper/
 ├── bats-support -> bats-support-0.3.0/
 ├── bats-support-0.3.0
 └── ext-setup.bash
+```
 
-
+``` bash
 git submodule add https://github.com/bats-core/bats-core.git test/bats
 via feature
 wget https://github.com/bats-core/bats-support/archive/refs/tags/v0.3.0.tar.gz
@@ -34,8 +40,18 @@ git submodule add https://github.com/bats-core/bats-support.git test/test_helper
 git submodule add https://github.com/bats-core/bats-assert.git test/test_helper/bats-assert
 
 git submodule add https://github.com/bats-core/bats-file.git test/test_helper/bats-file
+```
 
+# yq/yq
+[doku yq](https://mikefarah.gitbook.io/yq/)
+[doku yq v3.x](https://mikefarah.gitbook.io/yq/v/v3.x/)
 
+``` bash
+sudo add-apt-repository ppa:rmescandon/yq
+sudo apt update
+sudo apt install yq -y
+```
+``` bash
 #!/usr/bin/env bash
 
  tap_print_var_value() {
@@ -60,3 +76,4 @@ _ext_setup() {
     TEST_PROJECT_DIR="${TEST_CONCERN_DIR}/project_folder"
     FIRST_RUN_OF_TEST_UNDER_EXAMINATION="${TEST_BUILD_DIR}/${TEST_UNDER_EXAMINATION}_first_run"
 }
+```
