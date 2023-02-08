@@ -23,15 +23,16 @@ test/test_helper/
 └── ext-setup.bash
 
 
-git submodule add https://github.com/bats-core/bats-core.git test/bats --branch v1.2.8
+git submodule add https://github.com/bats-core/bats-core.git test/bats
 via feature
 wget https://github.com/bats-core/bats-support/archive/refs/tags/v0.3.0.tar.gz
+wget https://github.com/bats-core/bats-assert/archive/refs/tags/v2.1.0.tar.gz
+wget https://github.com/bats-core/bats-file/archive/refs/tags/v0.3.0.tar.gz
+
 git submodule add https://github.com/bats-core/bats-support.git test/test_helper/bats-support
 
-wget https://github.com/bats-core/bats-assert/archive/refs/tags/v2.1.0.tar.gz
 git submodule add https://github.com/bats-core/bats-assert.git test/test_helper/bats-assert
 
-wget https://github.com/bats-core/bats-file/archive/refs/tags/v0.3.0.tar.gz
 git submodule add https://github.com/bats-core/bats-file.git test/test_helper/bats-file
 
 

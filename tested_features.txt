@@ -1,0 +1,6 @@
+1..5
+ok 1 the backingstore for the project is configured
+ok 2 script fails if the project dir already exits
+ok 3 function fails if project dir already exits
+ok 4 function fails without positional paramerter
+ok 5 script fails without positional paramerter

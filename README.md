@@ -3,7 +3,7 @@ Almost A Static Site Generator
 
 ## Feature
  - your due diligence
- - @see Teest Protocol ```<link pending>``` 
+ - @see [Tested Features](tested_features.txt)
 
 ## runtime dependencies
 - [bash](https://www.gnu.org/software/bash/)

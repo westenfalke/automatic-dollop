@@ -6,5 +6,12 @@
     "ghcr.io/guiyomh/features/vim:0": {},
     "ghcr.io/devcontainers-contrib/features/w3m-apt-get:1": {},
     "ghcr.io/edouard-lopez/devcontainer-features/bats:0": {}
-  }
+},
+"customizations": {
+	"vscode": {
+		"extensions": [
+			"jetmartin.bats"
+		]
+	}
+}
 }
