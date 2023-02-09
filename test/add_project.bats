@@ -51,13 +51,13 @@ setup() {
 }
 
 # this functions will have access to the global VARS specified in the setup
-@test 'function fails without positional paramerter' {
+@test 'function fails without one positional paramerter' {
     run "$TEST_UNDER_EXAMINATION"
     assert_failure
 }
 
 # calling the script will deny access to the global VARS specified in the setup
-@test "script fails without positional paramerter" {
+@test "script fails without one positional paramerter" {
     run "$TEST_UNDER_EXAMINATION.bash"
     assert_failure
 }
