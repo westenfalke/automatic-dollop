@@ -6,8 +6,9 @@ Almost A Static Site Generator
  - @see [Tested Features](tested_features.txt)
 
 ## runtime dependencies
-- [bash](https://www.gnu.org/software/bash/)
-- [pandoc](https://github.com/jgm/pandoc)
+- [bash manual](https://www.gnu.org/software/bash/manual/bash.html)
+- [pandoc demo](https://pandoc.org/demos.html)
+- [jq tutotial](https://stedolan.github.io/jq/tutorial/)
 - some [CLI](https://de.wikipedia.org/wiki/CLI) command from '/usr/bin' in the scope of [busybox](https://git.busybox.net/busybox)
 
 ## development depandencies 

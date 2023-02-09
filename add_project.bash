@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
 add_project() {
     set -o nounset
-    source params.bash
+    set -x
     declare fail="${1}"
-    source <(printf "%s\n" "$@")
-    declare -r _configfile_="${BASE_DIR}/${PARAM_CONFIG_NAME}"
-    if [[ -e "$BASE_DIR" ]]; then
+    eval "declare -rA arguments=$@"
+    if [[ -e "${arguments[BASE_DIR]}" ]]; then
         exit 1
     else
-        mkdir -vp "$BASE_DIR"
+        mkdir -vp "${arguments[BASE_DIR]}"
+        printf "%s=%s\n" "BACKINGSTORE" "${arguments[BACKINGSTORE]}"  >> "${arguments[BASE_DIR]}/${arguments[CONFIG_NAME]}"
+        printf "%s=%s\n" "PROJECT_NAME" "${arguments[PROJECT_NAME]}"  >> "${arguments[BASE_DIR]}/${arguments[CONFIG_NAME]}"
     fi
-    printf "%s=%s\n" "${PARAM_BACKINGSTORE}" "$BACKINGSTORE"  >> "$_configfile_"
-    printf "%s=%s\n" "${PARAM_PROJECT_NAME}" "$PROJECT_NAME"  >> "$_configfile_"
 }
 
 (return 0 2>/dev/null) || "$(basename "${0%.*}")" "$@"

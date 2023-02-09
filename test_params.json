@@ -1,0 +1,14 @@
+{
+  "parameter": {
+      "base_dir": "BASE_DIR",
+      "backingstore": "BACKINGSTORE",
+      "project_name": "PROJECT_NAME",
+      "config_name": "CONFIG_NAME"
+      },
+    "defaults": {
+      "base_dir": "/tmp/bats/add_project/test_folder/foo",
+      "backingstore": "disk",
+      "project_name": "ssg_test_project",
+      "config_name": ".ssgrc"
+      }
+}

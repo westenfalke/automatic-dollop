@@ -1,34 +1,52 @@
 #!/usr/bin/env bats
+
+getParameter() {
+    args_as_json="$(cat test_params.json)"
+    declare -A test_arguments
+    eval "test_arguments+=( [$(jq '.parameter.base_dir'     <<< "$args_as_json")]=$(jq '.defaults.base_dir'     <<< "$args_as_json"))"
+    eval "test_arguments+=( [$(jq '.parameter.backingstore' <<< "$args_as_json")]=$(jq '.defaults.backingstore' <<< "$args_as_json"))"
+    eval "test_arguments+=( [$(jq '.parameter.project_name' <<< "$args_as_json")]=$(jq '.defaults.project_name' <<< "$args_as_json"))"
+    eval "test_arguments+=( [$(jq '.parameter.config_name'  <<< "$args_as_json")]=$(jq '.defaults.config_name'  <<< "$args_as_json"))"
+    readonly test_arguments
+    printf "%s\n" "$(declare -p test_arguments|sed s/declare.*test_arguments=//)"
+}
+
+
 setup() {
     load 'test_helper/ext-setup'
     _ext_setup
     load "../${TEST_UNDER_EXAMINATION}"
-    load "../params"
-    TEST_PROJECT_NAME="TEST_ProjectName"
-    TEST_BASE_DIR="${TEST_PROJECT_DIR}/foo"
-    TEST_BACKINGSTORE=disk
-    TEST_CONFIGFILE="${TEST_BASE_DIR}/${PARAM_CONFIG_NAME}"
+
     if [[ ! -e "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}" ]]; then
         mkdir -pv ${TEST_PROJECT_DIR}
-        run ${TEST_UNDER_EXAMINATION}.bash $(printf "%s=%s\n%s=%s\n%s=%s\n" "${PARAM_BASE_DIR}" "${TEST_BASE_DIR}" "${PARAM_PROJECT_NAME}" "${TEST_PROJECT_NAME}" "${PARAM_BACKINGSTORE}" "${TEST_BACKINGSTORE}" )
+        TEST_PARAMS_AS_AN_AARRAY="$(getParameter)"
+        eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
+        run ${TEST_UNDER_EXAMINATION}.bash "$TEST_PARAMS_AS_AN_AARRAY"
         touch "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}"
     fi
 }
 
+
 @test "the backingstore for the project is configured" {
-    assert [ -e "$TEST_CONFIGFILE" ]
-    run cat "$TEST_CONFIGFILE"
-    assert_output --partial "${PARAM_PROJECT_NAME}=${TEST_PROJECT_NAME}"
-    assert_output --partial "${PARAM_BACKINGSTORE}=${TEST_BACKINGSTORE}"
+    TEST_PARAMS_AS_AN_AARRAY="$(getParameter)"
+    eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
+    assert [ -e "${test_arguments[BASE_DIR]}/${test_arguments[CONFIG_NAME]}" ]
+    run cat "${test_arguments[BASE_DIR]}/${test_arguments[CONFIG_NAME]}"
+    assert_output --partial "PROJECT_NAME=${test_arguments[PROJECT_NAME]}"
+    assert_output --partial "BACKINGSTORE=${test_arguments[BACKINGSTORE]}"
 }
 
 @test 'script fails if the project dir already exits' {
-    run ${TEST_UNDER_EXAMINATION}.bash $(printf "%s=%s\n%s=%s\n%s=%s\n" "${PARAM_BASE_DIR}" "${TEST_PROJECT_DIR}" "${PARAM_PROJECT_NAME}" "${TEST_PROJECT_NAME}" "${PARAM_BACKINGSTORE}" "${TEST_BACKINGSTORE}" )
+    TEST_PARAMS_AS_AN_AARRAY="$(getParameter)"
+    eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
+    run ${TEST_UNDER_EXAMINATION}.bash "$TEST_PARAMS_AS_AN_AARRAY"
     assert_failure
 }
 
 @test 'function fails if project dir already exits' {
-    run ${TEST_UNDER_EXAMINATION} $(printf "%s=%s\n%s=%s\n%s=%s\n" "${PARAM_BASE_DIR}" "${TEST_PROJECT_DIR}" "${PARAM_PROJECT_NAME}" "${TEST_PROJECT_NAME}" "${PARAM_BACKINGSTORE}" "${TEST_BACKINGSTORE}" )
+    TEST_PARAMS_AS_AN_AARRAY="$(getParameter)"
+    eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
+    run ${TEST_UNDER_EXAMINATION} "$TEST_PARAMS_AS_AN_AARRAY"
     assert_failure
 }
 
