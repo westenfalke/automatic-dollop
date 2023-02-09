@@ -3,7 +3,7 @@ Almost A Static Site Generator
 
 ## Feature
  - your due diligence
- - @see [Tested Features](tested_features.txt)
+ - @see [Tested Features](tested_features.md)
 
 ## runtime dependencies
 - [bash manual](https://www.gnu.org/software/bash/manual/bash.html)
