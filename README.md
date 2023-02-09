@@ -8,10 +8,10 @@ Almost A Static Site Generator
 ## runtime dependencies
 - [bash manual](https://www.gnu.org/software/bash/manual/bash.html)
 - [pandoc demo](https://pandoc.org/demos.html)
-- [jq tutotial](https://stedolan.github.io/jq/tutorial/)
+- [jq tutorial](https://stedolan.github.io/jq/tutorial/)
 - some [CLI](https://de.wikipedia.org/wiki/CLI) command from '/usr/bin' in the scope of [busybox](https://git.busybox.net/busybox)
 
-## development depandencies 
+## development dependencies 
 - [bats-core](https://github.com/bats-core/bats-core)
 - [bats-assert](https://github.com/bats-core/bats-assert)
 - [bats-file](https://github.com/bats-core/bats-file)
