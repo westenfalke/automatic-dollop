@@ -1,5 +1,5 @@
 #!/usr/bin/env bats
-
+MODULE_NAME="$(basename ${BATS_TEST_FILENAME%.*})"
 getParameter() {
     args_as_json="$(cat test_params.json)"
     declare -A test_arguments
@@ -27,7 +27,7 @@ setup() {
 }
 
 
-@test "the backingstore for the project is configured" {
+@test "(${MODULE_NAME}) script.. creates a project" {
     TEST_PARAMS_AS_AN_AARRAY="$(getParameter)"
     eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
     assert [ -e "${test_arguments[BASE_DIR]}/${test_arguments[CONFIG_NAME]}" ]
@@ -36,28 +36,28 @@ setup() {
     assert_output --partial "BACKINGSTORE=${test_arguments[BACKINGSTORE]}"
 }
 
-@test 'script fails if the project dir already exits' {
+@test "(${MODULE_NAME}) script.. fails if the project already exits" {
     TEST_PARAMS_AS_AN_AARRAY="$(getParameter)"
     eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
     run ${TEST_UNDER_EXAMINATION}.bash "$TEST_PARAMS_AS_AN_AARRAY"
     assert_failure
 }
 
-@test 'function fails if project dir already exits' {
+@test "(${MODULE_NAME}) function fails if the project already exits" {
     TEST_PARAMS_AS_AN_AARRAY="$(getParameter)"
     eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
-    run ${TEST_UNDER_EXAMINATION} "$TEST_PARAMS_AS_AN_AARRAY"
+    run "$TEST_UNDER_EXAMINATION" "$TEST_PARAMS_AS_AN_AARRAY"
     assert_failure
 }
 
 # this functions will have access to the global VARS specified in the setup
-@test 'function fails without one positional paramerter' {
+@test "(${MODULE_NAME}) function fails without a positional paramerter" {
     run "$TEST_UNDER_EXAMINATION"
     assert_failure
 }
 
 # calling the script will deny access to the global VARS specified in the setup
-@test "script fails without one positional paramerter" {
-    run "$TEST_UNDER_EXAMINATION.bash"
+@test "(${MODULE_NAME}) script.. fails without a positional paramerter" {
+    run "${TEST_UNDER_EXAMINATION}.bash"
     assert_failure
 }

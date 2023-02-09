@@ -1,6 +1,6 @@
 1..5
-ok 1 the backingstore for the project is configured
-ok 2 script fails if the project dir already exits
-ok 3 function fails if project dir already exits
-ok 4 function fails without one positional paramerter
-ok 5 script fails without one positional paramerter
+ok 1 (add_project) script.. creates a project
+ok 2 (add_project) script.. fails if the project already exits
+ok 3 (add_project) function fails if the project already exits
+ok 4 (add_project) function fails without a positional paramerter
+ok 5 (add_project) script.. fails without a positional paramerter

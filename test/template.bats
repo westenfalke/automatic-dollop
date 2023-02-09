@@ -1,4 +1,5 @@
 #!/usr/bin/env bats
+MODULE_NAME="$(basename ${BATS_TEST_FILENAME%.*})"
 # TEST_UNDER_EXAMINATION: template.bash
 # keep ${FUNCNAME} and 'basename' in sync
 # function will be launched only if not sourced 
@@ -13,13 +14,13 @@ setup() {
 }
 
 # this functions will have access to the global VARS specified in the setup
-@test "function fails without positional paramerter" {
-    run ${TEST_UNDER_EXAMINATION}
+@test "(${MODULE_NAME}) function fails without a positional paramerter" {
+    run "$TEST_UNDER_EXAMINATION"
     assert_failure
 }
 
 # calling the script will deny access to the global VARS specified in the setup
-@test "script fails without positional paramerter" {
-    run ${TEST_UNDER_EXAMINATION}.bash
+@test "(${MODULE_NAME}) script.. fails without a positional paramerter" {
+    run "${TEST_UNDER_EXAMINATION}.bash"
     assert_failure
 }
