@@ -23,32 +23,11 @@
 ```
 
 ``` bash
-printf "( %s )\n"  $(jq '.[].base_dir' test_params.json |sed -e ':a;N;$!ba;s/\n/=/' -e 's/^"/["/' -e 's/"=/"]=/')
+printf "( %s )\n"  $(jq '.[].base_dir' add_project.json |sed -e ':a;N;$!ba;s/\n/=/' -e 's/^"/["/' -e 's/"=/"]=/')
 
 ( ["BASE_DIR"]="/tmp/bats" )
 ```
 
-``` bash
-declare -a arr=( $(jq -r '.[].base_dir' test_params.json) )
-declare -p arr
-printf '%s\n' "${arr[@]}"
-printf -v param "%s\n" "$(jq '.[].base_dir' test_params.json |sed -e ':a;N;$!ba;s/\n/=/' -e 's/^"/[/' -e 's/"=/]=/' )"
-printf "json: %s\n" "$param"
-
-declare -A aarr=( [key1]="value1"  [key2]="value2" )
-declare -p aarr
-#eval "declare -A jarr=( $param )"
-#eval "declare -A jarr=( $(jq '.[].base_dir' test_params.json |sed -e ':a;N;$!ba;s/\n/=/' -e 's/^"/[/' -e 's/"=/]=/' ) )"
-json="$(cat test_params.json)"
-declare -A jarr
-eval "jarr+=( [$(jq '.parameter.base_dir'     <<< "$json")]=$(jq '.defaults.base_dir'     <<< "$json"))"
-eval "jarr+=( [$(jq '.parameter.backingstore' <<< "$json")]=$(jq '.defaults.backingstore' <<< "$json"))"
-eval "jarr+=( [$(jq '.parameter.project_name' <<< "$json")]=$(jq '.defaults.project_name' <<< "$json"))"
-eval "jarr+=( [$(jq '.parameter.config_name'  <<< "$json")]=$(jq '.defaults.config_name'  <<< "$json"))"
-declare -p jarr
-printf '%s\n' "${!aarr[@]}"
-printf '%s\n' "${aarr[@]}"
-```
 
 
 ``` docker
