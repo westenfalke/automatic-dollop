@@ -9,7 +9,7 @@ _ext_setup() {
     load 'test_helper/bats-assert/load'
     load 'test_helper/bats-file/load'
     PROJECT_ROOT="$( cd "$( dirname "${BATS_TEST_FILENAME}" )/.." >/dev/null 2>&1 && pwd )"
-    PATH="${PROJECT_ROOT}:$PATH"
+    PATH="${PROJECT_ROOT}/src:$PATH"
     TEST_BUILD_DIR='/tmp/bats'
     TEST_UNDER_EXAMINATION="$(basename ${BATS_TEST_FILENAME%.*})"
     TEST_CONCERN_DIR="${TEST_BUILD_DIR}/${TEST_UNDER_EXAMINATION}"

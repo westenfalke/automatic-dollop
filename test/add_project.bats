@@ -4,7 +4,7 @@ MODULE_NAME="$(basename ${BATS_TEST_FILENAME%.*})"
 setup() {
     load 'test_helper/ext-setup'
     _ext_setup
-    load "../${TEST_UNDER_EXAMINATION}"
+    load "${TEST_UNDER_EXAMINATION}.bash"
 
     if [[ ! -e "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}" ]]; then
         mkdir -pv ${TEST_PROJECT_DIR}

@@ -109,11 +109,11 @@ _ext_setup() {
 #!/usr/bin/env bash
 JSON2AArray() {
     set -o nounset
-    eval "declare -rA JASON2AArray_ARGS=$@"
-    args_as_json="$(cat "${JASON2AArray_ARGS[json_file]}")"
+    eval "declare -rA JSON2AArray_ARGS=$@"
+    args_as_json="$(cat "${JSON2AArray_ARGS[json_file]}")"
     declare -A AArray
-    for property_name in ${JASON2AArray_ARGS[property_names]} ; do
-        eval "AArray+=( [$(jq .${JASON2AArray_ARGS[hash_key]}.${property_name} <<< "$args_as_json")]=$(jq .${JASON2AArray_ARGS[hash_value]}.${property_name} <<< "$args_as_json"))"
+    for property_name in ${JSON2AArray_ARGS[property_names]} ; do
+        eval "AArray+=( [$(jq .${JSON2AArray_ARGS[hash_key]}.${property_name} <<< "$args_as_json")]=$(jq .${JSON2AArray_ARGS[hash_value]}.${property_name} <<< "$args_as_json"))"
     done
     readonly AArray
     printf "%s\n" "$(declare -p AArray|sed s/declare.*AArray=//)"
@@ -126,16 +126,16 @@ JSON2AArray() {
 # 
 # ([PARAM_NAME_n]="value_n" [PARAM_NAME_n-1]="value_n-1" [PARAM_NAME_2]="value_2" [PARAM_NAME_1]="value_1" )
 # ARGS $@ generic example
-# JASON2AArray_ARGS+=( [hash_key]='<left_value>' )
-# JASON2AArray_ARGS+=( [hash_value]='<right_value>' )
-# JASON2AArray_ARGS+=( [property_names]='<property_1> <property_2> ... <property_n-1> <property_n>' )
-# JASON2AArray_ARGS+=( [json_file]='<filename>' )
+# JSON2AArray_ARGS+=( [hash_key]='<left_value>' )
+# JSON2AArray_ARGS+=( [hash_value]='<right_value>' )
+# JSON2AArray_ARGS+=( [property_names]='<property_1> <property_2> ... <property_n-1> <property_n>' )
+# JSON2AArray_ARGS+=( [json_file]='<filename>' )
 #
 # ARGS $@ specific example
-# JASON2AArray_ARGS+=( [hash_key]='parameter' )
-# JASON2AArray_ARGS+=( [hash_value]='defaults' )
-# JASON2AArray_ARGS+=( [property_names]='base_dir backingstore project_name config_name' )
-# JASON2AArray_ARGS+=( [json_file]='test_params.json' )
+# JSON2AArray_ARGS+=( [hash_key]='parameter' )
+# JSON2AArray_ARGS+=( [hash_value]='defaults' )
+# JSON2AArray_ARGS+=( [property_names]='base_dir backingstore project_name config_name' )
+# JSON2AArray_ARGS+=( [json_file]='test_params.json' )
 #
 # AArray genecric Result
 # AArray+=( [PARAM_NAME_1]='<value_1>' )
@@ -193,7 +193,7 @@ MODULE_NAME="$(basename ${BATS_TEST_FILENAME%.*})"
 setup() {
     load 'test_helper/ext-setup'
     _ext_setup
-    load "../${TEST_UNDER_EXAMINATION}"
+    load "${TEST_UNDER_EXAMINATION}.bash"
     if [[ ! -e "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}" ]]; then
         mkdir -pv "${TEST_PROJECT_DIR}"
         touch "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}"
