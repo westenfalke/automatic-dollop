@@ -5,10 +5,15 @@ Almost A Static Site Generator
  - your due diligence
  - @see [Tested Features](tested_features.md)
 
+``` bash
+#!/usr/bin/env bash
+set -eu
+bats test -t|sed -e s'/^ok/-\ [x]\ ok/' -e s'/^not ok/-\ [-]\ not ok/' -e '1 s/^/\#\ Tested\ Features\ /' |tee 'tested_features.md'
+```
+
 ## runtime dependencies
 - [bash manual](https://www.gnu.org/software/bash/manual/bash.html)
 - [pandoc demo](https://pandoc.org/demos.html)
-- [jq tutorial](https://stedolan.github.io/jq/tutorial/)
 - some [CLI](https://de.wikipedia.org/wiki/CLI) command from '/usr/bin' in the scope of [busybox](https://git.busybox.net/busybox)
 
 ## development dependencies 

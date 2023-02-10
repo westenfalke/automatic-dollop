@@ -104,3 +104,136 @@ _ext_setup() {
     FIRST_RUN_OF_TEST_UNDER_EXAMINATION="${TEST_BUILD_DIR}/${TEST_UNDER_EXAMINATION}_first_run"
 }
 ```
+
+``` bash
+#!/usr/bin/env bash
+JSON2AArray() {
+    set -o nounset
+    eval "declare -rA JASON2AArray_ARGS=$@"
+    args_as_json="$(cat "${JASON2AArray_ARGS[json_file]}")"
+    declare -A AArray
+    for property_name in ${JASON2AArray_ARGS[property_names]} ; do
+        eval "AArray+=( [$(jq .${JASON2AArray_ARGS[hash_key]}.${property_name} <<< "$args_as_json")]=$(jq .${JASON2AArray_ARGS[hash_value]}.${property_name} <<< "$args_as_json"))"
+    done
+    readonly AArray
+    printf "%s\n" "$(declare -p AArray|sed s/declare.*AArray=//)"
+}
+
+(return 0 2>/dev/null) || "$(basename "${0%.*}")" "$@"
+# Declare an associative array from JSON ina way to elaborate and complicated manner
+# declare -A AArray=([PARAM_NAME_n]="value_n"                           [PARAM_NAME_n-1]="value_n-1"      [PARAM_NAME_2]="value_2" [PARAM_NAME_1]="value_1" )
+# devlare -A AArray=([BASE_DIR]="/tmp/bats/add_project/test_folder/foo" [PROJECT_NAME]="ssg_test_project" [CONFIG_NAME]=".ssgrc"   [BACKINGSTORE]="disk" )
+# 
+# ([PARAM_NAME_n]="value_n" [PARAM_NAME_n-1]="value_n-1" [PARAM_NAME_2]="value_2" [PARAM_NAME_1]="value_1" )
+# ARGS $@ generic example
+# JASON2AArray_ARGS+=( [hash_key]='<left_value>' )
+# JASON2AArray_ARGS+=( [hash_value]='<right_value>' )
+# JASON2AArray_ARGS+=( [property_names]='<property_1> <property_2> ... <property_n-1> <property_n>' )
+# JASON2AArray_ARGS+=( [json_file]='<filename>' )
+#
+# ARGS $@ specific example
+# JASON2AArray_ARGS+=( [hash_key]='parameter' )
+# JASON2AArray_ARGS+=( [hash_value]='defaults' )
+# JASON2AArray_ARGS+=( [property_names]='base_dir backingstore project_name config_name' )
+# JASON2AArray_ARGS+=( [json_file]='test_params.json' )
+#
+# AArray genecric Result
+# AArray+=( [PARAM_NAME_1]='<value_1>' )
+# AArray+=( [PARAM_NAME_2]='<value_2>' )
+# AArray+=( [...]='<...>' )
+# AArray+=( [PARAM_NAME_n-1]='<value_n-1>' )
+# AArray+=( [PARAM_NAME_n]='<value_n>' )
+#
+# AArray specific Result
+# AArray+=[BASE_DIR]="/tmp/bats/add_project/test_folder/foo" 
+# AArray+=[PROJECT_NAME]="ssg_test_project" 
+# AArray+=[CONFIG_NAME]=".ssgrc" [BACKINGSTORE]="disk" 
+#
+# JSON generic json_file
+# {
+#     "left_value": {
+#       "property_1": "PARAM_NAME_1",
+#       "property_2": "PARAM_NAME_2",
+#       "property...": "...",
+#       "property_n-1": "PARAM_NAME_n-1",
+#       "property_n": "PARAM_NAME_n"
+#       },
+#     "right_value": {
+#       "property_1": "value_1",
+#       "property_2": "value_2",
+#       "property...": "...",
+#       "property_n-1": "value_n-1",
+#       "property_n": "value_n"
+#       }
+# }
+#
+# JSON specific json_file
+# {
+#   "parameter": {
+#       "base_dir": "BASE_DIR",
+#       "backingstore": "BACKINGSTORE",
+#       "project_name": "PROJECT_NAME",
+#       "config_name": "CONFIG_NAME"
+#       },
+#     "defaults": {
+#       "base_dir": "/tmp/bats/add_project/test_folder/foo",
+#       "backingstore": "disk",
+#       "project_name": "ssg_test_project",
+#       "config_name": ".ssgrc"
+#       }
+# }
+#
+
+```
+
+``` bash
+#!/usr/bin/env bats
+MODULE_NAME="$(basename ${BATS_TEST_FILENAME%.*})"
+
+setup() {
+    load 'test_helper/ext-setup'
+    _ext_setup
+    load "../${TEST_UNDER_EXAMINATION}"
+    if [[ ! -e "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}" ]]; then
+        mkdir -pv "${TEST_PROJECT_DIR}"
+        touch "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}"
+    fi
+}
+
+@test "(${MODULE_NAME}) map JSON into associative array" { 
+    #tbd read values from JSON file and don't use fixed values
+    local -A generic_arguments
+    generic_arguments+=( [hash_key]='left_value' )
+    generic_arguments+=( [hash_value]='right_value' )
+    generic_arguments+=( [property_names]='property_1 property_2 property_n_1 property_n' )
+    generic_arguments+=( [json_file]='test/JSON2AArray.json' )
+    readonly generic_arguments
+    run JSON2AArray  "$(declare -p generic_arguments|sed s/declare.*generic_arguments=//)"
+    assert_output '([PARAM_NAME_n]="value_n" [PARAM_NAME_n-1]="value_n-1" [PARAM_NAME_2]="value_2" [PARAM_NAME_1]="value_1" )'
+}
+
+# this functions will have access to the global VARS specified in the setup
+@test "(${MODULE_NAME}) function fails without a positional paramerter" {
+    run "$TEST_UNDER_EXAMINATION"
+    assert_failure
+}
+
+# calling the script will deny access to the global VARS specified in the setup
+@test "(${MODULE_NAME}) script.. fails without a positional paramerter" {
+    run "${TEST_UNDER_EXAMINATION}.bash"
+    assert_failure
+}
+```
+
+``` bash
+getParameter() {
+    local -A generic_arguments
+    generic_arguments+=( [hash_key]='parameter' )
+    generic_arguments+=( [hash_value]='defaults' )
+    generic_arguments+=( [property_names]='base_dir backingstore project_name config_name' )
+    generic_arguments+=( [json_file]='test/add_project.json' )
+    readonly generic_arguments
+    JSON2AArray  "$(declare -p generic_arguments|sed s/declare.*generic_arguments=//)"
+}
+
+```
