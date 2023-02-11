@@ -11,25 +11,25 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) function adds an ambiguos element to a polymorfic bucket" {
-    declare -r  T_bucket_aarray_directory="${TEST_PROJECT_DIR}/project_dir_function"
-    declare -rA T='( [element]="dohikey" [bucket]="([backingstore]="disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${T_bucket_aarray_directory}")" )'
-    declare -r  T_decl_auto="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
-    run ${TEST_UNDER_EXAMINATION} "${T_decl_auto}"
+    declare -r  T_bucket_directory="${TEST_PROJECT_DIR}/project_dir_function"
+    declare -rA T='( [element]="dohikey" [bucket]="([backingstore]="disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${T_bucket_directory}")" )'
+    declare -r  T_struct="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
+    run ${TEST_UNDER_EXAMINATION} "${T_struct}"
     assert_success
-    eval "declare -rA T_bucket_aarray=${T[bucket]}"
-    assert [ -d "${T_bucket_aarray[directory]}" ] 
-    assert [ -e "${T_bucket_aarray[directory]}/${T_bucket_aarray[file]}" ] 
+    eval "declare -rA T_bucket=${T[bucket]}"
+    assert [ -d "${T_bucket[directory]}" ] 
+    assert [ -e "${T_bucket[directory]}/${T_bucket[file]}" ] 
 }
 
 @test "(${MODULE_NAME}) script.. adds an ambiguos element to a polymorfic bucket" {
-    declare -r  T_bucket_aarray_directory="${TEST_PROJECT_DIR}/project_dir_script"
-    declare -rA T='( [element]="dohikey" [bucket]="([backingstore]="disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${T_bucket_aarray_directory}")" )'
-    declare -r  T_decl_auto="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
-    run ${TEST_UNDER_EXAMINATION} "${T_decl_auto}"
+    declare -r  T_bucket_directory="${TEST_PROJECT_DIR}/project_dir_script"
+    declare -rA T='( [element]="dohikey" [bucket]="([backingstore]="disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${T_bucket_directory}")" )'
+    declare -r  T_struct="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
+    run ${TEST_UNDER_EXAMINATION} "${T_struct}"
     assert_success
-    eval "declare -rA T_bucket_aarray=${T[bucket]}"
-    assert [ -d "${T_bucket_aarray[directory]}" ] 
-    assert [ -e "${T_bucket_aarray[directory]}/${T_bucket_aarray[file]}" ] 
+    eval "declare -rA T_bucket=${T[bucket]}"
+    assert [ -d "${T_bucket[directory]}" ] 
+    assert [ -e "${T_bucket[directory]}/${T_bucket[file]}" ] 
 }
 
 # this functions will have access to the global VARS specified in the setup
