@@ -11,25 +11,25 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) function adds an ambiguos element to a polymorfic bucket" {
-    declare -r  bucket_dir="${TEST_PROJECT_DIR}/project_dir_function"
-    declare -rA param_aarray='( [element]="dohikey" [bucket]="([backingstore]="disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${bucket_dir}")" )'
-    declare -r  param_decl_auto="$(declare -p param_aarray|sed s/^declare.*param_aarray=//)" #spellcheck
-    run ${TEST_UNDER_EXAMINATION} "${param_decl_auto}"
+    declare -r  T_bucket_aarray_directory="${TEST_PROJECT_DIR}/project_dir_function"
+    declare -rA T='( [element]="dohikey" [bucket]="([backingstore]="disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${T_bucket_aarray_directory}")" )'
+    declare -r  T_decl_auto="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
+    run ${TEST_UNDER_EXAMINATION} "${T_decl_auto}"
     assert_success
-    eval "declare -rA params_bucket_aarray=${param_aarray[bucket]}"
-    assert [ -d "${params_bucket_aarray[directory]}" ] 
-    assert [ -e "${params_bucket_aarray[directory]}/${params_bucket_aarray[file]}" ] 
+    eval "declare -rA T_bucket_aarray=${T[bucket]}"
+    assert [ -d "${T_bucket_aarray[directory]}" ] 
+    assert [ -e "${T_bucket_aarray[directory]}/${T_bucket_aarray[file]}" ] 
 }
 
 @test "(${MODULE_NAME}) script.. adds an ambiguos element to a polymorfic bucket" {
-    declare -r  bucket_dir="${TEST_PROJECT_DIR}/project_dir_script"
-    declare -rA param_aarray='( [element]="dohikey" [bucket]="([backingstore]="disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${bucket_dir}")" )'
-    declare -r  param_decl_auto="$(declare -p param_aarray|sed s/^declare.*param_aarray=//)" #spellcheck
-    run ${TEST_UNDER_EXAMINATION} "${param_decl_auto}"
+    declare -r  T_bucket_aarray_directory="${TEST_PROJECT_DIR}/project_dir_script"
+    declare -rA T='( [element]="dohikey" [bucket]="([backingstore]="disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${T_bucket_aarray_directory}")" )'
+    declare -r  T_decl_auto="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
+    run ${TEST_UNDER_EXAMINATION} "${T_decl_auto}"
     assert_success
-    eval "declare -rA params_bucket_aarray=${param_aarray[bucket]}"
-    assert [ -d "${params_bucket_aarray[directory]}" ] 
-    assert [ -e "${params_bucket_aarray[directory]}/${params_bucket_aarray[file]}" ] 
+    eval "declare -rA T_bucket_aarray=${T[bucket]}"
+    assert [ -d "${T_bucket_aarray[directory]}" ] 
+    assert [ -e "${T_bucket_aarray[directory]}/${T_bucket_aarray[file]}" ] 
 }
 
 # this functions will have access to the global VARS specified in the setup
