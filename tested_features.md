@@ -6,10 +6,10 @@
 - [x] ok 4 (add_element) script.. fails without a positional paramerter
 - [x] ok 5 (add_project) script.. creates a project with input from Array definition
 - [x] ok 6 (add_project) function creates a project with input from Array definition
-- [x] ok 7 (add_project) script.. fails if the project already exits
-- [x] ok 8 (add_project) function fails if the project already exits
-- [x] ok 9 (add_project) function fails without a positional paramerter
-- [x] ok 10 (add_project) script.. fails without a positional paramerter
+- [x] ok 7 (add_project) script.. fails exit code (2) if the project already exits
+- [x] ok 8 (add_project) function fails exit code (2) if the project already exits
+- [x] ok 9 (add_project) function fails exit code (1) without a positional paramerter
+- [x] ok 10 (add_project) script.. fails exit code (1) without a positional paramerter
 - [x] ok 11 (template) function fails without a positional paramerter
 - [x] ok 12 (template) script.. fails without a positional paramerter
 

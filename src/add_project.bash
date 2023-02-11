@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
 add_project() {
     set -o nounset
-    set -x
-    declare fail="${1}"
-    eval "declare -rA arguments=$@"
-    if [[ -e "${arguments[BASE_DIR]}" ]]; then
+    if [[ "$#" != '1' ]]; then
         exit 1
     else
-        mkdir -vp "${arguments[BASE_DIR]}"
-        printf "%s=%s\n" "BACKINGSTORE" "${arguments[BACKINGSTORE]}"  >> "${arguments[BASE_DIR]}/${arguments[CONFIG_NAME]}"
-        printf "%s=%s\n" "PROJECT_NAME" "${arguments[PROJECT_NAME]}"  >> "${arguments[BASE_DIR]}/${arguments[CONFIG_NAME]}"
+        declare fail="${1}"
+        eval "declare -rA project=$@"
+        declare -r project_directory="${project[BASE_DIR]}"
+        if [[ -e "${project[BASE_DIR]}" ]]; then
+            exit 2
+        else
+            mkdir -vp "${project_directory}"
+            declare -r project_configuration="${project[BASE_DIR]}/${project[CONFIG_NAME]}"
+            printf "%s=%s\n" "BACKINGSTORE" "${project[BACKINGSTORE]}"  >> "${project_configuration}"
+            printf "%s=%s\n" "PROJECT_NAME" "${project[PROJECT_NAME]}"  >> "${project_configuration}"
+        fi
     fi
 }
 
