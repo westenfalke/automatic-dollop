@@ -34,7 +34,7 @@ setup() {
     assert_output --partial "BACKINGSTORE=${test_arguments_aarray[BACKINGSTORE]}"
 }
 
-@test "(${MODULE_NAME}) script.. fails exit code (2) if the project already exits" {
+@test "(${MODULE_NAME}) script.. fails with exit code (2) if the project already exits" {
     TEST_PARAMS_AS_AN_AARRAY="([BASE_DIR]="/tmp/bats/add_project/test_folder/existing_dir_script" [PROJECT_NAME]="ssg_test_project" [CONFIG_NAME]=".ssgrc"   [BACKINGSTORE]="disk" )"
     eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
     mkdir -pv ${test_arguments[BASE_DIR]}
@@ -42,7 +42,7 @@ setup() {
     assert_failure 2
 }
 
-@test "(${MODULE_NAME}) function fails exit code (2) if the project already exits" {
+@test "(${MODULE_NAME}) function fails with exit code (2) if the project already exits" {
     TEST_PARAMS_AS_AN_AARRAY="([BASE_DIR]="/tmp/bats/add_project/test_folder/existing_dir_function" [PROJECT_NAME]="ssg_test_project" [CONFIG_NAME]=".ssgrc"   [BACKINGSTORE]="disk" )"
     eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
     mkdir -pv ${test_arguments[BASE_DIR]}
@@ -51,13 +51,13 @@ setup() {
 }
 
 # this functions will have access to the global VARS specified in the setup
-@test "(${MODULE_NAME}) function fails exit code (1) without a positional paramerter" {
+@test "(${MODULE_NAME}) function fails with exit code (1) without a positional paramerter" {
     run "$TEST_UNDER_EXAMINATION"
     assert_failure 1
 }
 
 # calling the script will deny access to the global VARS specified in the setup
-@test "(${MODULE_NAME}) script.. fails exit code (1) without a positional paramerter" {
+@test "(${MODULE_NAME}) script.. fails with exit code (1) without a positional paramerter" {
     run "${TEST_UNDER_EXAMINATION}.bash"
     assert_failure 1
 }

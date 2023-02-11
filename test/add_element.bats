@@ -33,13 +33,13 @@ setup() {
 }
 
 # this functions will have access to the global VARS specified in the setup
-@test "(${MODULE_NAME}) function fails without a positional paramerter" {
+@test "(${MODULE_NAME}) function fails with exit code (1) without a positional paramerter" {
     run ${TEST_UNDER_EXAMINATION}
     assert_failure
 }
 
 # calling the script will deny access to the global VARS specified in the setup
-@test "(${MODULE_NAME}) script.. fails without a positional paramerter" {
+@test "(${MODULE_NAME}) script.. fails with exit code (1) without a positional paramerter" {
     run ${TEST_UNDER_EXAMINATION}.bash
     assert_failure
 }
