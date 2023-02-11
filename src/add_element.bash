@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# keep ${FUNCNAME} and 'basename' in sync
-# function will be launched only if not sourced 
 add_element() {
     set -o nounset
-    eval "declare -A add_element_arguments=$@"
-    eval "declare -rA add_element_bucket_aarray=${add_element_arguments[bucket]}"
-    mkdir -pv "${add_element_bucket_aarray[directory]}"
-    touch "${add_element_bucket_aarray[directory]}/${add_element_bucket_aarray[file]}"
+    eval "declare -A TYPE=$@"
+    eval "declare -rA TYPE_bucket=${TYPE[bucket]}"
+    declare -r TYPE_dir_name="${TYPE_bucket[directory]}"
+    mkdir -pv "$TYPE_dir_name"
+    declare -r TYPE_file_name="${TYPE_bucket[directory]}/${TYPE_bucket[file]}"
+    touch "$TYPE_file_name"
+    printf "%s\n" "${TYPE[element]}"
 }
 (return 0 2>/dev/null) || "$(basename "${0%.*}")" "$@"
