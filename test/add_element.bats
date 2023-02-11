@@ -12,7 +12,7 @@ setup() {
 
 @test "(${MODULE_NAME}) function adds an ambiguos element to a polymorfic bucket" {
     declare -r  T_bucket_directory="${TEST_PROJECT_DIR}/project_dir_function"
-    declare -rA T='( [element]="dohikey" [bucket]="([backingstore]="disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${T_bucket_directory}")" )'
+    declare -rA T='( [data]="dohikey" [bucket]="([backingstore]="disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${T_bucket_directory}")" )'
     declare -r  T_struct="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
     run ${TEST_UNDER_EXAMINATION} "${T_struct}"
     assert_success
@@ -23,7 +23,7 @@ setup() {
 
 @test "(${MODULE_NAME}) script.. adds an ambiguos element to a polymorfic bucket" {
     declare -r  T_bucket_directory="${TEST_PROJECT_DIR}/project_dir_script"
-    declare -rA T='( [element]="dohikey" [bucket]="([backingstore]="disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${T_bucket_directory}")" )'
+    declare -rA T='( [data]="dohikey" [bucket]="([backingstore]="disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${T_bucket_directory}")" )'
     declare -r  T_struct="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
     run ${TEST_UNDER_EXAMINATION} "${T_struct}"
     assert_success
