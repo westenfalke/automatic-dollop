@@ -15,7 +15,7 @@
       },
     "defaults": {
       "base_dir": "/tmp/bats",
-      "backingstore": "disk",
+      "backingstore": "plain_text_on_disk",
       "project_name": "ssg_test_project",
       "config_name": ".ssgrc"
       }
@@ -122,7 +122,7 @@ JSON2AArray() {
 (return 0 2>/dev/null) || "$(basename "${0%.*}")" "$@"
 # Declare an associative array from JSON ina way to elaborate and complicated manner
 # declare -A AArray=([PARAM_NAME_n]="value_n"                           [PARAM_NAME_n-1]="value_n-1"      [PARAM_NAME_2]="value_2" [PARAM_NAME_1]="value_1" )
-# devlare -A AArray=([BASE_DIR]="/tmp/bats/add_project/test_folder/foo" [PROJECT_NAME]="ssg_test_project" [CONFIG_NAME]=".ssgrc"   [BACKINGSTORE]="disk" )
+# devlare -A AArray=([BASE_DIR]="/tmp/bats/add_project/test_folder/foo" [PROJECT_NAME]="ssg_test_project" [CONFIG_NAME]=".ssgrc"   [BACKINGSTORE]="plain_text_on_disk" )
 # 
 # ([PARAM_NAME_n]="value_n" [PARAM_NAME_n-1]="value_n-1" [PARAM_NAME_2]="value_2" [PARAM_NAME_1]="value_1" )
 # ARGS $@ generic example
@@ -147,7 +147,7 @@ JSON2AArray() {
 # AArray specific Result
 # AArray+=[BASE_DIR]="/tmp/bats/add_project/test_folder/foo" 
 # AArray+=[PROJECT_NAME]="ssg_test_project" 
-# AArray+=[CONFIG_NAME]=".ssgrc" [BACKINGSTORE]="disk" 
+# AArray+=[CONFIG_NAME]=".ssgrc" [BACKINGSTORE]="plain_text_on_disk" 
 #
 # JSON generic json_file
 # {
@@ -177,7 +177,7 @@ JSON2AArray() {
 #       },
 #     "defaults": {
 #       "base_dir": "/tmp/bats/add_project/test_folder/foo",
-#       "backingstore": "disk",
+#       "backingstore": "plain_text_on_disk",
 #       "project_name": "ssg_test_project",
 #       "config_name": ".ssgrc"
 #       }

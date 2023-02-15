@@ -10,10 +10,18 @@ add_project() {
         if [[ -e "${project[BASE_DIR]}" ]]; then
             exit 2
         else
-            mkdir -vp "${project_directory}"
-            declare -r project_configuration="${project[BASE_DIR]}/${project[CONFIG_NAME]}"
-            printf "%s=%s\n" "BACKINGSTORE" "${project[BACKINGSTORE]}"  >> "${project_configuration}"
-            printf "%s=%s\n" "PROJECT_NAME" "${project[PROJECT_NAME]}"  >> "${project_configuration}"
+            add_element.bash "([data]='BACKINGSTORE=${project[BACKINGSTORE]}' \
+                               [bucket]=\"( \
+                                  [backingstore]='plain_text_on_disk' \
+                                  [file]='${project[CONFIG_NAME]}' \
+                                  [type]='wireframe' \
+                                  [directory]='${project[BASE_DIR]}')\" )"    
+            add_element.bash "([data]='PROJECT_NAME=${project[PROJECT_NAME]}' \
+                               [bucket]=\"( \
+                                  [backingstore]='plain_text_on_disk' \
+                                  [file]='${project[CONFIG_NAME]}' \
+                                  [type]='wireframe' \
+                                  [directory]='${project[BASE_DIR]}')\" )"    
         fi
     fi
 }
