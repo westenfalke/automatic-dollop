@@ -21,7 +21,7 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) adds one ambiguos element to a polymorfic bucket" {
-    declare -r  bucket_namespace="${TEST_PROJECT_DIR}/project_dir_one_element"
+    declare -r  bucket_namespace="${TEST_PROJECT_DIR}/namespace_one_element"
     declare -rA T='( [data]="dohikey" [bucket]="([backingstore]="plain_text_on_disk" [category]="backingstore.dat" [type]="wireframe" [namespace]="${bucket_namespace}")" )'
     declare -r  spellchecked_right_value_of_T="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
     run ${TEST_UNDER_EXAMINATION}.bash "${spellchecked_right_value_of_T}"
@@ -36,7 +36,7 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) adds two ambiguos element to a polymorfic bucket" {
-    declare -r  bucket_namespace="${TEST_PROJECT_DIR}/project_dir_two_element"
+    declare -r  bucket_namespace="${TEST_PROJECT_DIR}/namespace_two_elements"
     declare -rA T='( [data]="dohikey" [bucket]="([backingstore]="plain_text_on_disk" [category]="backingstore.dat" [type]="wireframe" [namespace]="${bucket_namespace}")" )'
     declare -r  spellchecked_right_value_of_T="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
     eval "declare -rA T_bucket=${T[bucket]}"

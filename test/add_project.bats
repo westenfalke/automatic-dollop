@@ -13,7 +13,7 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) creates a project within an uniq namespace" {
-    TEST_PARAMS_AS_AN_AARRAY="([NAMESPACE]="/tmp/bats/add_project/test_folder/new_project_dir_script" [PROJECT_NAME]="ssg_test_project" [CATEGORY_NAME]=".ssgrc"   [BACKINGSTORE]="plain_text_on_disk" )"
+    TEST_PARAMS_AS_AN_AARRAY="([NAMESPACE]="/tmp/bats/add_project/test_folder/new_project_namespace" [PROJECT_NAME]="ssg_test_project" [CATEGORY_NAME]=".ssgrc"   [BACKINGSTORE]="plain_text_on_disk" )"
     eval "declare -rA test_arguments_aarray=$TEST_PARAMS_AS_AN_AARRAY"
     run ${TEST_UNDER_EXAMINATION}.bash "$TEST_PARAMS_AS_AN_AARRAY"
     assert_success
@@ -24,7 +24,7 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) fails with exit code (2) if the project within the namespace already exits" {
-    TEST_PARAMS_AS_AN_AARRAY="([NAMESPACE]="/tmp/bats/add_project/test_folder/existing_dir_script" [PROJECT_NAME]="ssg_test_project" [CATEGORY_NAME]=".ssgrc"   [BACKINGSTORE]="plain_text_on_disk" )"
+    TEST_PARAMS_AS_AN_AARRAY="([NAMESPACE]="/tmp/bats/add_project/test_folder/existing_project_namespace" [PROJECT_NAME]="ssg_test_project" [CATEGORY_NAME]=".ssgrc"   [BACKINGSTORE]="plain_text_on_disk" )"
     eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
     mkdir -pv ${test_arguments[NAMESPACE]}
     run ${TEST_UNDER_EXAMINATION}.bash "$TEST_PARAMS_AS_AN_AARRAY"

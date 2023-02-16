@@ -17,18 +17,19 @@
 /tmp/bats
 ├── add_element
 │   └── test_folder
-│       ├── project_dir_one_element
+│       ├── namespace_one_element
 │       │   └── backingstore.dat
-│       └── project_dir_two_element
+│       └── namespace_two_elements
 │           └── backingstore.dat
 ├── add_project
 │   └── test_folder
-│       ├── existing_dir_script
-│       └── new_project_dir_script
+│       ├── existing_project_namespace
+│       └── new_project_namespace
 │           └── .ssgrc
 ├── maybe_add_namespace
 │   └── test_folder
-│       └── existing_dir
+│       ├── existing_namespace
+│       └── new_namespace
 ├── template
 │   └── test_folder
 ├── add_element_first_run
@@ -36,5 +37,5 @@
 ├── maybe_add_namespace_first_run
 └── template_first_run
 
-13 directories, 7 files
+14 directories, 7 files
 ```
