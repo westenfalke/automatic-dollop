@@ -12,15 +12,15 @@ setup() {
     fi
 }
 
-@test "(${MODULE_NAME}) creates a project within an uniq namespace" {
+@test "(${MODULE_NAME}) create a uniq namespace, an alias and main connfiguration" {
     declare -r namespace="${TEST_PROJECT_DIR}/new_project_namespace"
-    declare -r project_name='ssg_test_project'
-    declare -r config_file='.ssgrc'
+    declare -r namespace_alias='ssg_test_project'
+    declare -r bucket_name='main_connfig'
     declare -r plain_text_on_disk='plain_text_on_disk'
-    declare -r fqn="${namespace}/${config_file}"
+    declare -r fqn="${namespace}/${bucket_name}"
     parameter="([NAMESPACE]='$namespace' \
-                [PROJECT_NAME]='$project_name' \
-                [CATEGORY_NAME]='$config_file' \
+                [NAMESPACE_ALIAS]='$namespace_alias' \
+                [BUCKET_NAME]='$bucket_name' \
                 [BACKINGSTORE]='$plain_text_on_disk' )"
     
     run ${TEST_UNDER_EXAMINATION}.bash "$parameter"
@@ -28,19 +28,19 @@ setup() {
     assert [ -d "${namespace}" ]
     assert [ -e "${fqn}" ]
     run cat "${fqn}"
-    assert_output --partial "PROJECT_NAME=${project_name}"
+    assert_output --partial "NAMESPACE_ALIAS=${namespace_alias}"
     assert_output --partial "BACKINGSTORE=${plain_text_on_disk}"
 }
 
-@test "(${MODULE_NAME}) fails if the project within the namespace already exits" {
+@test "(${MODULE_NAME}) fails if the namespace already exits" {
     declare -r namespace="${TEST_PROJECT_DIR}/existing_project_namespace"
-    declare -r project_name='ssg_test_project'
-    declare -r config_file='.ssgrc'
+    declare -r namespace_alias='ssg_test_project'
+    declare -r bucket_name='main_connfig'
     declare -r plain_text_on_disk='plain_text_on_disk'
-    declare -r fqn="${namespace}/${config_file}"
+    declare -r fqn="${namespace}/${bucket_name}"
     parameter="([NAMESPACE]='$namespace' \
-                [PROJECT_NAME]='$project_name' \
-                [CATEGORY_NAME]='$config_file' \
+                [NAMESPACE_ALIAS]='$namespace_alias' \
+                [BUCKET_NAME]='$bucket_name' \
                 [BACKINGSTORE]='$plain_text_on_disk' )"
 
     maybe_add_namespace.bash "$parameter"

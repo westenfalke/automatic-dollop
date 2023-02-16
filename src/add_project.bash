@@ -10,13 +10,13 @@ add_project() {
         add_element.bash "([data]='BACKINGSTORE=${project[BACKINGSTORE]}' \
                             [bucket]=\"( \
                                 [backingstore]='${project[BACKINGSTORE]}' \
-                                [category]='${project[CATEGORY_NAME]}' \
+                                [bucket_name]='${project[BUCKET_NAME]}' \
                                 [type]='wireframe' \
                                 [namespace]='${project[NAMESPACE]}')\" )"    
-        add_element.bash "([data]='PROJECT_NAME=${project[PROJECT_NAME]}' \
+        add_element.bash "([data]='NAMESPACE_ALIAS=${project[NAMESPACE_ALIAS]}' \
                             [bucket]=\"( \
                                 [backingstore]='${project[BACKINGSTORE]}' \
-                                [category]='${project[CATEGORY_NAME]}' \
+                                [bucket_name]='${project[BUCKET_NAME]}' \
                                 [type]='wireframe' \
                                 [namespace]='${project[NAMESPACE]}')\" )"    
     fi

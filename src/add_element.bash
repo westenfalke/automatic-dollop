@@ -10,9 +10,9 @@ add_element() {
         if [[ "plain_text_on_disk" == "$backingstore" ]]; then
             declare -r dir_name="${T_bucket[namespace]}"              
             mkdir -pv "$dir_name"
-            declare -r file_name="${T_bucket[category]}"
-            declare -r config_file="${dir_name}/${file_name}"
-            printf "%s\n" "${T[data]}" >> "$config_file"
+            declare -r file_name="${T_bucket[bucket_name]}"
+            declare -r bucket_name="${dir_name}/${file_name}"
+            printf "%s\n" "${T[data]}" >> "$bucket_name"
         else
             printf "Backingstore type '%s' not yet implemented" "${backingstore}" >&2
             exit 4

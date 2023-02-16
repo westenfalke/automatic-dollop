@@ -11,7 +11,7 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) adds a new uniq namespace" {
-    TEST_PARAMS_AS_AN_AARRAY="([NAMESPACE]="${TEST_PROJECT_DIR}/new_namespace" [PROJECT_NAME]="ssg_test_project" [CATEGORY_NAME]=".ssgrc"   [BACKINGSTORE]="plain_text_on_disk" )"
+    TEST_PARAMS_AS_AN_AARRAY="([NAMESPACE]="${TEST_PROJECT_DIR}/new_namespace" [NAMESPACE_ALIAS]="ssg_test_project" [BUCKET_NAME]="bucket"   [BACKINGSTORE]="plain_text_on_disk" )"
     eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
     mkdir -pv ${test_arguments[NAMESPACE]}
     run ${TEST_UNDER_EXAMINATION}.bash "$TEST_PARAMS_AS_AN_AARRAY"
@@ -19,7 +19,7 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) fails if the namespace already exits" {
-    TEST_PARAMS_AS_AN_AARRAY="([NAMESPACE]="${TEST_PROJECT_DIR}/existing_namespace" [PROJECT_NAME]="ssg_test_project" [CATEGORY_NAME]=".ssgrc"   [BACKINGSTORE]="plain_text_on_disk" )"
+    TEST_PARAMS_AS_AN_AARRAY="([NAMESPACE]="${TEST_PROJECT_DIR}/existing_namespace" [NAMESPACE_ALIAS]="ssg_test_project" [BUCKET_NAME]="bucket"   [BACKINGSTORE]="plain_text_on_disk" )"
     eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
     mkdir -pv ${test_arguments[NAMESPACE]}
     run ${TEST_UNDER_EXAMINATION}.bash "$TEST_PARAMS_AS_AN_AARRAY"
