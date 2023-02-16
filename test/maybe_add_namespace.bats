@@ -5,7 +5,6 @@ setup() {
     _ext_setup
     load "${TEST_UNDER_EXAMINATION}.bash"
     if [[ ! -e "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}" ]]; then
-        mkdir -pv "${TEST_PROJECT_DIR}"
         touch "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}"
     fi
 }

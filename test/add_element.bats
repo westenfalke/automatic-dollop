@@ -5,13 +5,13 @@ setup() {
     _ext_setup
     load "${TEST_UNDER_EXAMINATION}.bash"
     if [[ ! -e "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}" ]]; then
-        mkdir -pv "${TEST_PROJECT_DIR}"
+        
         touch "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}"
     fi
 }
 
 @test "(${MODULE_NAME}) fails if the type of backingstore is not implemented" {
-    declare -r bucket_namespace="${TEST_PROJECT_DIR}/project_dir_not_implemented"
+    declare -r bucket_namespace="project_dir_not_implemented"
     declare -r bucket_name='a_namespaced_bucket'
     declare -r data='dohikey'
     declare -r backingstore_not_implemented='not_implemented'
@@ -29,7 +29,7 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) adds one data element to a namespaced bucket" {
-    declare -r bucket_namespace="${TEST_PROJECT_DIR}/namespace_one_element"
+    declare -r bucket_namespace="namespace_one_element"
     declare -r bucket_name='a_namespaced_bucket'
     declare -r data='dohikey'
     declare -r backingstore='plain_text_on_disk'
@@ -51,7 +51,7 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) adds two data elements to a namespaced bucket" {
-    declare -r bucket_namespace="${TEST_PROJECT_DIR}/namespace_two_elements"
+    declare -r bucket_namespace="namespace_two_elements"
     declare -r bucket_name='a_namespaced_bucket'
     declare -r data='dohikey'
     declare -r backingstore='plain_text_on_disk'

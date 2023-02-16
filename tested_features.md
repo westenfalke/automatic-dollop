@@ -4,7 +4,7 @@
 - [x] ok 2 (add_element) adds one data element to a namespaced bucket
 - [x] ok 3 (add_element) adds two data elements to a namespaced bucket
 - [x] ok 4 (add_element) fails on calls without a paramerter
-- [x] ok 5 (add_project) create a uniq namespace, an alias and main connfiguration
+- [x] ok 5 (add_project) create a uniq namespace, an alias and main configuration
 - [x] ok 6 (add_project) fails if the namespace already exits
 - [x] ok 7 (add_project) fails on calls without a paramerter
 - [x] ok 8 (maybe_add_namespace) adds a new uniq namespace
@@ -25,7 +25,7 @@
 │   └── test_folder
 │       ├── existing_project_namespace
 │       └── new_project_namespace
-│           └── main_connfig
+│           └── main_config
 ├── maybe_add_namespace
 │   └── test_folder
 │       ├── existing_namespace

@@ -12,10 +12,10 @@ setup() {
     fi
 }
 
-@test "(${MODULE_NAME}) create a uniq namespace, an alias and main connfiguration" {
+@test "(${MODULE_NAME}) create a uniq namespace, an alias and main configuration" {
     declare -r namespace="${TEST_PROJECT_DIR}/new_project_namespace"
     declare -r namespace_alias='ssg_test_project'
-    declare -r bucket_name='main_connfig'
+    declare -r bucket_name='main_config'
     declare -r plain_text_on_disk='plain_text_on_disk'
     declare -r fqn="${namespace}/${bucket_name}"
     parameter="([NAMESPACE]='$namespace' \
@@ -33,9 +33,9 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) fails if the namespace already exits" {
-    declare -r namespace="${TEST_PROJECT_DIR}/existing_project_namespace"
+    declare -r namespace="existing_project_namespace"
     declare -r namespace_alias='ssg_test_project'
-    declare -r bucket_name='main_connfig'
+    declare -r bucket_name='main_config'
     declare -r plain_text_on_disk='plain_text_on_disk'
     declare -r fqn="${namespace}/${bucket_name}"
     parameter="([NAMESPACE]='$namespace' \
