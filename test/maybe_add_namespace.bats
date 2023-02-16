@@ -10,7 +10,7 @@ setup() {
     fi
 }
 
-@test "(${MODULE_NAME}) adds a new non existing namespace" {
+@test "(${MODULE_NAME}) adds a new uniq namespace" {
     TEST_PARAMS_AS_AN_AARRAY="([NAMESPACE]="${TEST_PROJECT_DIR}/new_namespace" [PROJECT_NAME]="ssg_test_project" [CATEGORY_NAME]=".ssgrc"   [BACKINGSTORE]="plain_text_on_disk" )"
     eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
     mkdir -pv ${test_arguments[NAMESPACE]}
@@ -18,7 +18,7 @@ setup() {
     assert_failure 2
 }
 
-@test "(${MODULE_NAME}) fails with exit code (2) if the namespace already exits" {
+@test "(${MODULE_NAME}) fails if the namespace already exits" {
     TEST_PARAMS_AS_AN_AARRAY="([NAMESPACE]="${TEST_PROJECT_DIR}/existing_namespace" [PROJECT_NAME]="ssg_test_project" [CATEGORY_NAME]=".ssgrc"   [BACKINGSTORE]="plain_text_on_disk" )"
     eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
     mkdir -pv ${test_arguments[NAMESPACE]}
@@ -26,7 +26,7 @@ setup() {
     assert_failure 2
 }
 
-@test "(${MODULE_NAME}) fails with exit code (128) without a positional paramerter" {
+@test "(${MODULE_NAME}) fails on calls without a paramerter" {
     run "${TEST_UNDER_EXAMINATION}.bash"
     assert_failure 128
 }

@@ -1,16 +1,16 @@
 # Test Report
 ## Tested Features 1..11
-- [x] ok 1 (add_element) fails if backinstore is not 'plain_text_on_disk'
-- [x] ok 2 (add_element) adds one ambiguos element to a polymorfic bucket
-- [x] ok 3 (add_element) adds two ambiguos element to a polymorfic bucket
-- [x] ok 4 (add_element) fails with exit code (128) without a positional paramerter
+- [x] ok 1 (add_element) fails if backinstore is not implemented
+- [x] ok 2 (add_element) adds one data element to a namespaced bucket
+- [x] ok 3 (add_element) adds two data elements to a namespaced bucket
+- [x] ok 4 (add_element) fails on calls without a paramerter
 - [x] ok 5 (add_project) creates a project within an uniq namespace
-- [x] ok 6 (add_project) fails with exit code (2) if the project within the namespace already exits
-- [x] ok 7 (add_project) fails with exit code (128) without a positional paramerter
-- [x] ok 8 (maybe_add_namespace) adds a new non existing namespace
-- [x] ok 9 (maybe_add_namespace) fails with exit code (2) if the namespace already exits
-- [x] ok 10 (maybe_add_namespace) fails with exit code (128) without a positional paramerter
-- [x] ok 11 (template) fails with exit code (128) without a positional paramerter
+- [x] ok 6 (add_project) fails if the project within the namespace already exits
+- [x] ok 7 (add_project) fails on calls without a paramerter
+- [x] ok 8 (maybe_add_namespace) adds a new uniq namespace
+- [x] ok 9 (maybe_add_namespace) fails if the namespace already exits
+- [x] ok 10 (maybe_add_namespace) fails on calls without a paramerter
+- [x] ok 11 (template) fails on calls without a paramerter
 
 ## Listing files and directories
 ``` bash

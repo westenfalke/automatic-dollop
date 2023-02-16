@@ -13,7 +13,7 @@ setup() {
     fi
 }
 
-@test "(${MODULE_NAME}) fails with exit code (128) without a positional paramerter" {
+@test "(${MODULE_NAME}) fails on calls without a paramerter" {
     run "${TEST_UNDER_EXAMINATION}.bash"
     assert_failure 128
 }

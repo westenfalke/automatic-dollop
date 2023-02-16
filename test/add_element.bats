@@ -10,47 +10,73 @@ setup() {
     fi
 }
 
-@test "(${MODULE_NAME}) fails if backinstore is not 'plain_text_on_disk'" {
-    declare -r  bucket_namespace="${TEST_PROJECT_DIR}/project_dir_inmemory"
-    # left value = right value == spellchecked_right_value_of_T
-    declare -rA T='( [data]="dohikey" [bucket]="([backingstore]="inmemory" [category]="backingstore.dat" [type]="wireframe" [namespace]="${bucket_namespace}")" )'
-    declare -r spellchecked_right_value_of_T="$(declare -p T|sed s/^declare.*T=//)" 
-    run ${TEST_UNDER_EXAMINATION} "${spellchecked_right_value_of_T}"
+@test "(${MODULE_NAME}) fails if backinstore is not implemented" {
+    declare -r bucket_namespace="${TEST_PROJECT_DIR}/project_dir_not_implemented"
+    declare -r category='backingstore_not_implemented.dat'
+    declare -r data='dohikey'
+    declare -r backingstore_not_implemented='not_implemented'
+    declare -r type='wireframe'
+    declare -r fqn="${bucket_namespace}/${category}"
+    declare -r parameter="( [data]='$data' \
+                            [bucket]=\"([backingstore]='$backingstore_not_implemented' \
+                                        [category]='$category' \
+                                        [type]='$type' \
+                                        [namespace]='$bucket_namespace')\" )"
+    run ${TEST_UNDER_EXAMINATION} "$parameter"
     assert_failure 4
     assert [ ! -d "${bucket_namespace}" ]
+    assert [ ! -e "${fqn}" ]
 }
 
-@test "(${MODULE_NAME}) adds one ambiguos element to a polymorfic bucket" {
-    declare -r  bucket_namespace="${TEST_PROJECT_DIR}/namespace_one_element"
-    declare -rA T='( [data]="dohikey" [bucket]="([backingstore]="plain_text_on_disk" [category]="backingstore.dat" [type]="wireframe" [namespace]="${bucket_namespace}")" )'
-    declare -r  spellchecked_right_value_of_T="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
-    run ${TEST_UNDER_EXAMINATION}.bash "${spellchecked_right_value_of_T}"
+@test "(${MODULE_NAME}) adds one data element to a namespaced bucket" {
+    declare -r bucket_namespace="${TEST_PROJECT_DIR}/namespace_one_element"
+    declare -r category='backingstore.dat'
+    declare -r data='dohikey'
+    declare -r backingstore='plain_text_on_disk'
+    declare -r type='wireframe'
+    declare -r fqn="${bucket_namespace}/${category}"
+    declare -r parameter="( [data]='$data' \
+                            [bucket]=\"([backingstore]='$backingstore' \
+                                        [category]='$category' \
+                                        [type]='$type' \
+                                        [namespace]='$bucket_namespace')\" )"
+    run ${TEST_UNDER_EXAMINATION}.bash "$parameter"
     assert_success
-    eval "declare -rA T_bucket=${T[bucket]}"
-    assert [ -d "${T_bucket[namespace]}" ] 
-    assert [ -e "${T_bucket[namespace]}/${T_bucket[category]}" ] 
+    assert [ -d "${bucket_namespace}" ] 
+    assert [ -e "${fqn}" ] 
     
-    run cat "${T_bucket[namespace]}/${T_bucket[category]}"
-    assert_output "${T[data]}"
+    run cat "${fqn}"
+    assert_output "${data}"
 
 }
 
-@test "(${MODULE_NAME}) adds two ambiguos element to a polymorfic bucket" {
-    declare -r  bucket_namespace="${TEST_PROJECT_DIR}/namespace_two_elements"
-    declare -rA T='( [data]="dohikey" [bucket]="([backingstore]="plain_text_on_disk" [category]="backingstore.dat" [type]="wireframe" [namespace]="${bucket_namespace}")" )'
-    declare -r  spellchecked_right_value_of_T="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
-    eval "declare -rA T_bucket=${T[bucket]}"
-    run ${TEST_UNDER_EXAMINATION}.bash "${spellchecked_right_value_of_T}"
+@test "(${MODULE_NAME}) adds two data elements to a namespaced bucket" {
+    declare -r bucket_namespace="${TEST_PROJECT_DIR}/namespace_two_elements"
+    declare -r category='backingstore.dat'
+    declare -r data='dohikey'
+    declare -r backingstore='plain_text_on_disk'
+    declare -r type='wireframe'
+    declare -r fqn="${bucket_namespace}/${category}"
+    declare -r parameter="( [data]='$data' \
+                            [bucket]=\"([backingstore]='$backingstore' \
+                                        [category]='$category' \
+                                        [type]='$type' \
+                                        [namespace]='$bucket_namespace')\" )"
+    run ${TEST_UNDER_EXAMINATION}.bash "$parameter"
     assert_success
-    run ${TEST_UNDER_EXAMINATION}.bash "${spellchecked_right_value_of_T}"
+    assert [ -d "${bucket_namespace}" ] 
+    assert [ -e "${fqn}" ]     
+    run cat "${fqn}"
+    assert_output "${data}"
+    run ${TEST_UNDER_EXAMINATION}.bash "$parameter"
     assert_success
-    run cat "${T_bucket[namespace]}/${T_bucket[category]}"
-    assert_output  --partial "${T[data]}
-${T[data]}"    
+    run cat "${fqn}"
+    assert_output  --partial "${data}
+${data}"    
 
 }
 
-@test "(${MODULE_NAME}) fails with exit code (128) without a positional paramerter" {
+@test "(${MODULE_NAME}) fails on calls without a paramerter" {
     run ${TEST_UNDER_EXAMINATION}.bash
     assert_failure 128
 }
