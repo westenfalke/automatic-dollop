@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 add_element() {
     set -o nounset
-    set -x
     if [[ "$#" != '1' ]]; then
         exit 128
     else

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 add_project() {
     set -o nounset
-    set -e
+    set -o errexit
     if [[ "$#" != '1' ]]; then
         exit 128
     else
-        eval "declare -rA project=$@"
         maybe_add_namespace.bash "$@"
+        eval "declare -rA project=$@"
         add_element.bash "([data]='BACKINGSTORE=${project[BACKINGSTORE]}' \
                             [bucket]=\"( \
                                 [backingstore]='${project[BACKINGSTORE]}' \
