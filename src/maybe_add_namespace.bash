@@ -5,9 +5,9 @@ maybe_add_namespace() {
         exit 128
     else
         eval "declare -A T=$@"
-        declare -r backingstore="${T[BACKINGSTORE]}"
+        declare -r backingstore="${T[backingstore]}"
         if [[ "plain_text_on_disk" == "$backingstore" ]]; then
-            declare -r project_directory="${T[NAMESPACE]}"              
+            declare -r project_directory="${T[namesapce]}"              
             if [[ -e "$project_directory" ]]; then
                 # thing about returning an alternative namespace
                 exit 2

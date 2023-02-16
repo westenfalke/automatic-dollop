@@ -3,7 +3,6 @@ MODULE_NAME="$(basename ${BATS_TEST_FILENAME%.*})"
 setup() {
     load 'test_helper/ext-setup'
     _ext_setup
-    load "${TEST_UNDER_EXAMINATION}.bash"
     if [[ ! -e "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}" ]]; then
         
         touch "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}"
@@ -22,7 +21,7 @@ setup() {
                                         [bucket_name]='$bucket_name' \
                                         [type]='$type' \
                                         [namespace]='$bucket_namespace')\" )"
-    run ${TEST_UNDER_EXAMINATION} "$parameter"
+    run ${TEST_UNDER_EXAMINATION}.bash "$parameter"
     assert_failure 4
     assert [ ! -d "${bucket_namespace}" ]
     assert [ ! -e "${fqn}" ]
