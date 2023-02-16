@@ -1,28 +1,24 @@
 #!/usr/bin/env bash
 add_project() {
     set -o nounset
+    set -e
     if [[ "$#" != '1' ]]; then
-        exit 1
+        exit 128
     else
-        declare fail="${1}"
         eval "declare -rA project=$@"
-        declare -r project_directory="${project[BASE_DIR]}"
-        if [[ -e "${project[BASE_DIR]}" ]]; then
-            exit 2
-        else
-            add_element.bash "([data]='BACKINGSTORE=${project[BACKINGSTORE]}' \
-                               [bucket]=\"( \
-                                  [backingstore]='plain_text_on_disk' \
-                                  [file]='${project[CONFIG_NAME]}' \
-                                  [type]='wireframe' \
-                                  [directory]='${project[BASE_DIR]}')\" )"    
-            add_element.bash "([data]='PROJECT_NAME=${project[PROJECT_NAME]}' \
-                               [bucket]=\"( \
-                                  [backingstore]='plain_text_on_disk' \
-                                  [file]='${project[CONFIG_NAME]}' \
-                                  [type]='wireframe' \
-                                  [directory]='${project[BASE_DIR]}')\" )"    
-        fi
+        maybe_add_namespace.bash "$@"
+        add_element.bash "([data]='BACKINGSTORE=${project[BACKINGSTORE]}' \
+                            [bucket]=\"( \
+                                [backingstore]='${project[BACKINGSTORE]}' \
+                                [category]='${project[CATEGORY_NAME]}' \
+                                [type]='wireframe' \
+                                [namespace]='${project[NAMESPACE]}')\" )"    
+        add_element.bash "([data]='PROJECT_NAME=${project[PROJECT_NAME]}' \
+                            [bucket]=\"( \
+                                [backingstore]='${project[BACKINGSTORE]}' \
+                                [category]='${project[CATEGORY_NAME]}' \
+                                [type]='wireframe' \
+                                [namespace]='${project[NAMESPACE]}')\" )"    
     fi
 }
 

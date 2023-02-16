@@ -3,6 +3,8 @@
 # function will be launched only if not sourced 
 template() {
     set -o nounset
-    declare -r fail="$1"
+    if [[ "$#" != '1' ]]; then
+        exit 128
+    fi
 }
 (return 0 2>/dev/null) || "$(basename "${0%.*}")" "$@"

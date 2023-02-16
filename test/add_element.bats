@@ -10,67 +10,47 @@ setup() {
     fi
 }
 
-@test "(${MODULE_NAME}) function fails if backinstore is not 'plain_text_on_disk'" {
-    declare -r  bucket_directory="${TEST_PROJECT_DIR}/project_dir_inmemory"
+@test "(${MODULE_NAME}) fails if backinstore is not 'plain_text_on_disk'" {
+    declare -r  bucket_namespace="${TEST_PROJECT_DIR}/project_dir_inmemory"
     # left value = right value == spellchecked_right_value_of_T
-    declare -rA T='( [data]="dohikey" [bucket]="([backingstore]="inmemory" [file]="backingstore.dat" [type]="wireframe" [directory]="${bucket_directory}")" )'
+    declare -rA T='( [data]="dohikey" [bucket]="([backingstore]="inmemory" [category]="backingstore.dat" [type]="wireframe" [namespace]="${bucket_namespace}")" )'
     declare -r spellchecked_right_value_of_T="$(declare -p T|sed s/^declare.*T=//)" 
     run ${TEST_UNDER_EXAMINATION} "${spellchecked_right_value_of_T}"
     assert_failure 4
-    assert [ ! -d "${bucket_directory}" ]
+    assert [ ! -d "${bucket_namespace}" ]
 }
 
-@test "(${MODULE_NAME}) function adds an ambiguos element to a polymorfic bucket" {
-    declare -r  bucket_directory="${TEST_PROJECT_DIR}/project_dir_function"
-    # left value = right value == spellchecked_right_value_of_T
-    declare -rA T='( [data]="dohikey" [bucket]="([backingstore]="plain_text_on_disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${bucket_directory}")" )'
+@test "(${MODULE_NAME}) adds one ambiguos element to a polymorfic bucket" {
+    declare -r  bucket_namespace="${TEST_PROJECT_DIR}/project_dir_one_element"
+    declare -rA T='( [data]="dohikey" [bucket]="([backingstore]="plain_text_on_disk" [category]="backingstore.dat" [type]="wireframe" [namespace]="${bucket_namespace}")" )'
     declare -r  spellchecked_right_value_of_T="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
     run ${TEST_UNDER_EXAMINATION}.bash "${spellchecked_right_value_of_T}"
     assert_success
     eval "declare -rA T_bucket=${T[bucket]}"
-    assert [ -d "${T_bucket[directory]}" ] 
-    assert [ -e "${T_bucket[directory]}/${T_bucket[file]}" ] 
+    assert [ -d "${T_bucket[namespace]}" ] 
+    assert [ -e "${T_bucket[namespace]}/${T_bucket[category]}" ] 
     
-    run cat "${T_bucket[directory]}/${T_bucket[file]}"
-    assert_output --partial "${T[data]}"
-    
-    run ${TEST_UNDER_EXAMINATION}.bash "${spellchecked_right_value_of_T}"
-    assert_success
-    run cat "${T_bucket[directory]}/${T_bucket[file]}"
-    assert_output  "${T[data]}
-${T[data]}"    
+    run cat "${T_bucket[namespace]}/${T_bucket[category]}"
+    assert_output "${T[data]}"
 
 }
 
-@test "(${MODULE_NAME}) script.. adds an ambiguos element to a polymorfic bucket" {
-    declare -r  bucket_directory="${TEST_PROJECT_DIR}/project_dir_script"
-    declare -rA T='( [data]="dohikey" [bucket]="([backingstore]="plain_text_on_disk" [file]="backingstore.dat" [type]="wireframe" [directory]="${bucket_directory}")" )'
+@test "(${MODULE_NAME}) adds two ambiguos element to a polymorfic bucket" {
+    declare -r  bucket_namespace="${TEST_PROJECT_DIR}/project_dir_two_element"
+    declare -rA T='( [data]="dohikey" [bucket]="([backingstore]="plain_text_on_disk" [category]="backingstore.dat" [type]="wireframe" [namespace]="${bucket_namespace}")" )'
     declare -r  spellchecked_right_value_of_T="$(declare -p T|sed s/^declare.*T=//)" #spellcheck
-    run ${TEST_UNDER_EXAMINATION}.bash "${spellchecked_right_value_of_T}"
-    assert_success
     eval "declare -rA T_bucket=${T[bucket]}"
-    assert [ -d "${T_bucket[directory]}" ] 
-    assert [ -e "${T_bucket[directory]}/${T_bucket[file]}" ] 
-    
-    run cat "${T_bucket[directory]}/${T_bucket[file]}"
-    assert_output --partial "${T[data]}"
-    
     run ${TEST_UNDER_EXAMINATION}.bash "${spellchecked_right_value_of_T}"
     assert_success
-    run cat "${T_bucket[directory]}/${T_bucket[file]}"
-    assert_output  "${T[data]}
+    run ${TEST_UNDER_EXAMINATION}.bash "${spellchecked_right_value_of_T}"
+    assert_success
+    run cat "${T_bucket[namespace]}/${T_bucket[category]}"
+    assert_output  --partial "${T[data]}
 ${T[data]}"    
 
 }
 
-# this functions will have access to the global VARS specified in the setup
-@test "(${MODULE_NAME}) function fails with exit code (1) without a positional paramerter" {
-    run ${TEST_UNDER_EXAMINATION}
-    assert_failure
-}
-
-# calling the script will deny access to the global VARS specified in the setup
-@test "(${MODULE_NAME}) script.. fails with exit code (1) without a positional paramerter" {
+@test "(${MODULE_NAME}) fails with exit code (128) without a positional paramerter" {
     run ${TEST_UNDER_EXAMINATION}.bash
-    assert_failure
+    assert_failure 128
 }
