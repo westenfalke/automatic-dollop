@@ -13,7 +13,7 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) list buckets in full qualified a namespace" {
-    declare -r namespace="namespace"
+    declare -r namespace="full.qualified.namespace"
     declare -r namespace_alias='ssg_test_project'
     declare -r plain_text_on_disk='plain_text_on_disk'
     declare -ra buckets=( bucket_00 bucket_01 bucket_02 )

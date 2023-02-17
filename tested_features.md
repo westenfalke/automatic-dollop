@@ -18,37 +18,44 @@
 ``` bash
 /tmp/bats
 ├── add_element
-│   └── test_folder
-│       └── namespace
-│           ├── one_element
-│           │   └── a_namespaced_bucket
-│           └── two_elements
-│               └── a_namespaced_bucket
+│   ├── root_directory
+│   │   └── full
+│   │       └── qualified
+│   │           └── namespace
+│   │               ├── one_element
+│   │               │   └── a_namespaced_bucket
+│   │               └── two_elements
+│   │                   └── a_namespaced_bucket
+│   └── add_element.first_run
 ├── add_project
-│   └── test_folder
-│       └── project
-│           └── namespace
-│               ├── existing
-│               └── new
-│                   └── main_config
+│   ├── root_directory
+│   │   └── full
+│   │       └── qualified
+│   │           └── namespace
+│   │               ├── project_existing
+│   │               └── project_new
+│   │                   └── main_config
+│   └── add_project.first_run
 ├── list_buckets
-│   └── test_folder
-│       └── namespace
-│           ├── bucket_00
-│           ├── bucket_01
-│           └── bucket_02
+│   ├── root_directory
+│   │   └── full
+│   │       └── qualified
+│   │           └── namespace
+│   │               ├── bucket_00
+│   │               ├── bucket_01
+│   │               └── bucket_02
+│   └── list_buckets.first_run
 ├── maybe_add_namespace
-│   └── test_folder
-│       └── namespace
-│           ├── existing
-│           └── new
-├── template
-│   └── test_folder
-├── add_element_first_run
-├── add_project_first_run
-├── list_buckets_first_run
-├── maybe_add_namespace_first_run
-└── template_first_run
+│   ├── root_directory
+│   │   └── full
+│   │       └── qualified
+│   │           └── namespace
+│   │               ├── existing
+│   │               └── new
+│   └── maybe_add_namespace.first_run
+└── template
+    ├── root_directory
+    └── template.first_run
 
-21 directories, 11 files
+28 directories, 11 files
 ```

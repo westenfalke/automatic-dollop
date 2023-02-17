@@ -28,7 +28,7 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) adds one data element to a namespaced bucket" {
-    declare -r bucket_namespace='namespace.one_element'
+    declare -r bucket_namespace='full.qualified.namespace.one_element'
     declare -r bucket_name='a_namespaced_bucket'
     declare -r data='dohikey'
     declare -r backingstore='plain_text_on_disk'
@@ -49,7 +49,7 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) adds two data elements to a namespaced bucket" {
-    declare -r bucket_namespace='namespace.two_elements'
+    declare -r bucket_namespace='full.qualified.namespace.two_elements'
     declare -r bucket_name='a_namespaced_bucket'
     declare -r data='dohikey'
     declare -r backingstore='plain_text_on_disk'

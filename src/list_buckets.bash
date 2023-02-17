@@ -9,7 +9,7 @@ list_buckets() {
         declare -r backingstore=${T_bucket[backingstore]}
         if [[ "$backingstore" == "plain_text_on_disk" ]] ; then
             printf "%s\n" "$(declare -p T)" >&2
-            pushd "${T_bucket[namespace]}"
+            pushd "${T_bucket[namespace]//.//}"
             find ./ -maxdepth 1 -type f | xargs -n 1 basename
             popd >/dev/null
             exit 1
