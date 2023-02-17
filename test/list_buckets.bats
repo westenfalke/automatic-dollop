@@ -12,7 +12,45 @@ setup() {
     fi
 }
 
+@test "(${MODULE_NAME}) list buckets in full qualified a namespace" {
+    declare -r namespace="namespace"
+    declare -r namespace_alias='ssg_test_project'
+    declare -r plain_text_on_disk='plain_text_on_disk'
+    declare -ra buckets=( bucket_00 bucket_01 bucket_02 )
+ 
+    run add_project.bash "([namesapce]='$namespace' \
+                            [namespace_alias]='$namespace_alias' \
+                            [bucket_name]='${buckets[0]}' \
+                            [backingstore]='$plain_text_on_disk' )"
+    assert_success
+    add_element.bash "([data]='foo=bar' \
+                        [bucket]=\"( \
+                            [backingstore]='${plain_text_on_disk}' \
+                            [bucket_name]='${buckets[1]}' \
+                            [type]='wireframe' \
+                            [namespace]='${namespace}')\" )"    
+    assert_success
+    add_element.bash "([data]='bat=baz' \
+                        [bucket]=\"( \
+                            [backingstore]='${plain_text_on_disk}' \
+                            [bucket_name]='${buckets[2]}' \
+                            [type]='wireframe' \
+                            [namespace]='${namespace}')\" )"    
+    assert_success
+    run "${TEST_UNDER_EXAMINATION}.bash" "([data]='cmd=list' \
+                                            [bucket]=\"( \
+                                                [backingstore]='${plain_text_on_disk}' \
+                                                [bucket_name]='*' \
+                                                [type]='wireframe' \
+                                                [namespace]='${namespace}')\" )"    
+    for bucket in ${buckets[@]}; do
+        assert_output --partial "$bucket"
+    done
+    assert_output --partial "${buckets[1]}"
+    assert_output --partial "${buckets[2]}"
+}
+
 @test "(${MODULE_NAME}) fails on calls without a paramerter" {
-    run "${TEST_UNDER_EXAMINATION}.bash"
+    run "${TEST_UNDER_EXAMINATION}.bash" 
     assert_failure 128
 }
