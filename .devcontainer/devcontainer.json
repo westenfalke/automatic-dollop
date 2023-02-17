@@ -4,8 +4,7 @@
     "ghcr.io/rocker-org/devcontainer-features/pandoc:1": {},
     "ghcr.io/devcontainers-contrib/features/wget-apt-get:1": {},
     "ghcr.io/guiyomh/features/vim:0": {},
-    "ghcr.io/devcontainers-contrib/features/w3m-apt-get:1": {},
-    "ghcr.io/edouard-lopez/devcontainer-features/bats:0": {}
+    "ghcr.io/devcontainers-contrib/features/w3m-apt-get:1": {}
 },
 "customizations": {
 	"vscode": {
