@@ -30,12 +30,15 @@ test/test_helper/
 ```
 
 ``` bash
-# bat ggf auch vi codespace feature via feature
-wget -qO- https://github.com/bats-core/bats-core/archive/refs/tags/v1.9.0.tar.gz    | tar xvz -C /workspaces/${RepositoryName}/test/test_helper
-pushd workspaces/${RepositoryName}/test/test_helper && ln -s bats-core-1.9.0/ bats-core
+# bat-core no longer as codespace feature
+wget -qO- https://github.com/bats-core/bats-core/archive/refs/tags/v1.9.0.tar.gz    | tar xvz -C /workspaces/${RepositoryName}/test
+pushd /workspaces/${RepositoryName}/test && ln -s bats-core-1.9.0 bats; popd
 wget -qO- https://github.com/bats-core/bats-support/archive/refs/tags/v0.3.0.tar.gz | tar xvz -C /workspaces/${RepositoryName}/test/test_helper
+pushd /workspaces/${RepositoryName}/test/test_helper && ln -s bats-support-0.3.0 bats-support; popd
 wget -qO- https://github.com/bats-core/bats-assert/archive/refs/tags/v2.1.0.tar.gz  | tar xvz -C /workspaces/${RepositoryName}/test/test_helper
+pushd /workspaces/${RepositoryName}/test/test_helper && ln -s bats-assert-2.1.0 bats-assert; popd
 wget -qO- https://github.com/bats-core/bats-file/archive/refs/tags/v0.3.0.tar.gz    | tar xvz -C /workspaces/${RepositoryName}/test/test_helper
+pushd /workspaces/${RepositoryName}/test/test_helper && ln -s bats-file-0.3.0 bats-file; popd
 
 git submodule add https://github.com/bats-core/bats-core.git test/bats
 
