@@ -12,11 +12,10 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) create a uniq namespace, an alias and main configuration" {
-    declare -r namespace="new_project_namespace"
+    declare -r namespace="project.namespace.new"
     declare -r namespace_alias='ssg_test_project'
     declare -r bucket_name='main_config'
     declare -r plain_text_on_disk='plain_text_on_disk'
-    declare -r fqn="${namespace}/${bucket_name}"
     parameter="([namesapce]='$namespace' \
                 [namespace_alias]='$namespace_alias' \
                 [bucket_name]='$bucket_name' \
@@ -24,19 +23,18 @@ setup() {
     
     run ${TEST_UNDER_EXAMINATION}.bash "$parameter"
     assert_success
-    assert [ -d "${namespace}" ]
-    assert [ -e "${fqn}" ]
-    run cat "${fqn}"
+    assert [ -d "${namespace//.//}" ]
+    assert [ -e "${namespace//.//}/${bucket_name}" ]
+    run cat "${namespace//.//}/${bucket_name}"
     assert_output --partial "namespace_alias=${namespace_alias}"
     assert_output --partial "backingstore=${plain_text_on_disk}"
 }
 
 @test "(${MODULE_NAME}) fails if the namespace already exits" {
-    declare -r namespace="existing_project_namespace"
+    declare -r namespace="project.namespace.existing"
     declare -r namespace_alias='ssg_test_project'
     declare -r bucket_name='main_config'
     declare -r plain_text_on_disk='plain_text_on_disk'
-    declare -r fqn="${namespace}/${bucket_name}"
     parameter="([namesapce]='$namespace' \
                 [namespace_alias]='$namespace_alias' \
                 [bucket_name]='$bucket_name' \
