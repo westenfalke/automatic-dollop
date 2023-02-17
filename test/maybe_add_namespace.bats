@@ -9,17 +9,16 @@ setup() {
 }
 
 @test "(${MODULE_NAME}) adds a new uniq namespace" {
-    TEST_PARAMS_AS_AN_AARRAY="([namesapce]="new_namespace" [namespace_alias]="ssg_test_project" [bucket_name]="bucket"   [backingstore]="plain_text_on_disk" )"
+    TEST_PARAMS_AS_AN_AARRAY="([namesapce]="namespace.new" [namespace_alias]="ssg_test_project" [bucket_name]="bucket"   [backingstore]="plain_text_on_disk" )"
     eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
-    mkdir -pv ${test_arguments[namesapce]}
     run ${TEST_UNDER_EXAMINATION}.bash "$TEST_PARAMS_AS_AN_AARRAY"
-    assert_failure 2
+    assert_success
 }
 
 @test "(${MODULE_NAME}) fails if the namespace already exits" {
-    TEST_PARAMS_AS_AN_AARRAY="([namesapce]="existing_namespace" [namespace_alias]="ssg_test_project" [bucket_name]="bucket"   [backingstore]="plain_text_on_disk" )"
+    TEST_PARAMS_AS_AN_AARRAY="([namesapce]="namespace.existing" [namespace_alias]="ssg_test_project" [bucket_name]="bucket"   [backingstore]="plain_text_on_disk" )"
     eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
-    mkdir -pv ${test_arguments[namesapce]}
+    mkdir -pv ${test_arguments[namesapce]//.//}
     run ${TEST_UNDER_EXAMINATION}.bash "$TEST_PARAMS_AS_AN_AARRAY"
     assert_failure 2
 }

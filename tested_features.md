@@ -19,15 +19,18 @@
 /tmp/bats
 ├── add_element
 │   └── test_folder
-│       ├── namespace_one_element
-│       │   └── a_namespaced_bucket
-│       └── namespace_two_elements
-│           └── a_namespaced_bucket
+│       └── namespace
+│           ├── one_element
+│           │   └── a_namespaced_bucket
+│           └── two_elements
+│               └── a_namespaced_bucket
 ├── add_project
 │   └── test_folder
-│       ├── existing_project_namespace
-│       └── new_project_namespace
-│           └── main_config
+│       └── project
+│           └── namespace
+│               ├── existing
+│               └── new
+│                   └── main_config
 ├── list_buckets
 │   └── test_folder
 │       └── namespace
@@ -36,8 +39,9 @@
 │           └── bucket_02
 ├── maybe_add_namespace
 │   └── test_folder
-│       ├── existing_namespace
-│       └── new_namespace
+│       └── namespace
+│           ├── existing
+│           └── new
 ├── template
 │   └── test_folder
 ├── add_element_first_run
@@ -46,5 +50,5 @@
 ├── maybe_add_namespace_first_run
 └── template_first_run
 
-17 directories, 11 files
+21 directories, 11 files
 ```
