@@ -15,34 +15,35 @@ setup() {
 @test "(${MODULE_NAME}) list buckets in full qualified a namespace" {
     declare -r namespace="full.qualified.namespace"
     declare -r namespace_alias='ssg_test_project'
-    declare -r plain_text_on_disk='plain_text_on_disk'
+    declare -r backingstore='default'
     declare -ra buckets=( bucket_00 bucket_01 bucket_02 )
  
     run add_project.bash "([namesapce]='$namespace' \
                             [namespace_alias]='$namespace_alias' \
                             [bucket_name]='${buckets[0]}' \
-                            [backingstore]='$plain_text_on_disk' )"
+                            [backingstore_kind]='$backingstore' )"
     assert_success
-    add_element.bash "([data]='foo=bar' \
+    add_element.bash "([payload]='foo=bar' \
                         [bucket]=\"( \
-                            [backingstore]='${plain_text_on_disk}' \
+                            [backingstore_kind]='$backingstore' \
                             [bucket_name]='${buckets[1]}' \
                             [type]='wireframe' \
-                            [namespace]='${namespace}')\" )"    
+                            [namespace]='$namespace')\" )"    
     assert_success
-    add_element.bash "([data]='bat=baz' \
+    add_element.bash "([payload]='bat=baz' \
                         [bucket]=\"( \
-                            [backingstore]='${plain_text_on_disk}' \
+                            [backingstore_kind]='$backingstore' \
                             [bucket_name]='${buckets[2]}' \
                             [type]='wireframe' \
-                            [namespace]='${namespace}')\" )"    
+                            [namespace]='$namespace')\" )"    
     assert_success
-    run "${TEST_UNDER_EXAMINATION}.bash" "([data]='cmd=list' \
+    run "${TEST_UNDER_EXAMINATION}.bash" "([payload]='cmd=list' \
                                             [bucket]=\"( \
-                                                [backingstore]='${plain_text_on_disk}' \
+                                                [backingstore_kind]='$backingstore' \
                                                 [bucket_name]='*' \
                                                 [type]='wireframe' \
-                                                [namespace]='${namespace}')\" )"    
+                                                [namespace]='$namespace')\" )"    
+    assert_success
     for bucket in ${buckets[@]}; do
         assert_output --partial "$bucket"
     done

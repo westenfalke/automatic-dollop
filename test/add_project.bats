@@ -14,12 +14,12 @@ setup() {
 @test "(${MODULE_NAME}) create a uniq namespace, an alias and main configuration" {
     declare -r namespace='full.qualified.namespace.project_new'
     declare -r namespace_alias='ssg_test_project'
-    declare -r bucket_name='main_config'
-    declare -r plain_text_on_disk='plain_text_on_disk'
+    declare -r bucket_name='main.config'
+    declare -r backingstore='default'
     parameter="([namesapce]='$namespace' \
                 [namespace_alias]='$namespace_alias' \
                 [bucket_name]='$bucket_name' \
-                [backingstore]='$plain_text_on_disk' )"
+                [backingstore_kind]='$backingstore' )"
     
     run ${TEST_UNDER_EXAMINATION}.bash "$parameter"
     assert_success
@@ -27,18 +27,18 @@ setup() {
     assert [ -e "${namespace//.//}/${bucket_name}" ]
     run cat "${namespace//.//}/${bucket_name}"
     assert_output --partial "namespace_alias=${namespace_alias}"
-    assert_output --partial "backingstore=${plain_text_on_disk}"
+    assert_output --partial "backingstore=${default}"
 }
 
 @test "(${MODULE_NAME}) fails if the namespace already exits" {
     declare -r namespace='full.qualified.namespace.project_existing'
     declare -r namespace_alias='ssg_test_project'
-    declare -r bucket_name='main_config'
-    declare -r plain_text_on_disk='plain_text_on_disk'
+    declare -r bucket_name='main.config'
+    declare -r backingstore='default'
     parameter="([namesapce]='$namespace' \
                 [namespace_alias]='$namespace_alias' \
                 [bucket_name]='$bucket_name' \
-                [backingstore]='$plain_text_on_disk' )"
+                [backingstore_kind]='$backingstore' )"
 
     maybe_add_namespace.bash "$parameter"
     run ${TEST_UNDER_EXAMINATION}.bash "$parameter"
