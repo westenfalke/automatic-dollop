@@ -3,10 +3,9 @@ MODULE_NAME="$(basename ${BATS_TEST_FILENAME%.*})"
 
 setup() {
     load 'test_helper/ext-setup'
-    _ext_setup
+    _ext_and_backingstore_default_setup
 
     if [[ ! -e "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}" ]]; then
-        mkdir -pv ${TEST_PROJECT_DIR}
         touch "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}"
     fi
 }

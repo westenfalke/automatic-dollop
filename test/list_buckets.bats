@@ -5,7 +5,7 @@ MODULE_NAME="$(basename ${BATS_TEST_FILENAME%.*})"
 # function will be launched only if not sourced 
 setup() {
     load 'test_helper/ext-setup'
-    _ext_setup
+    _ext_and_backingstore_default_setup
     if [[ ! -e "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}" ]]; then
         
         touch "${FIRST_RUN_OF_TEST_UNDER_EXAMINATION}"
