@@ -1,7 +1,3 @@
 test/test_helper/bats*
 test/bats*
 *.swp
-!LICENSE
-!README.md
-!tested_features.md
-*
