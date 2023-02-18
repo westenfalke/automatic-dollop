@@ -18,16 +18,6 @@
 
 ```
 
-``` bash
-test/test_helper/
-├── bats-assert -> bats-assert-2.1.0
-├── bats-assert-2.1.0
-├── bats-file -> bats-file-0.3.0
-├── bats-file-0.3.0
-├── bats-support -> bats-support-0.3.0/
-├── bats-support-0.3.0
-└── ext-setup.bash
-```
 
 ``` bash
 # bat-core no longer as codespace feature
