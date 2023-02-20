@@ -8,7 +8,7 @@ Almost A Static Site Generator
 ## runtime dependencies
 - bash [manual](https://www.gnu.org/software/bash/manual/bash.html)
 - pandoc [demo](https://pandoc.org/demos.html)
-- some CLI [command](https://busybox.net/downloads/BusyBox.html#commands) from '/usr/bin' in the scope of [busybox](https://git.busybox.net/busybox)
+- some CLI [commands](https://busybox.net/downloads/BusyBox.html#commands) from '/usr/bin' in the scope of [busybox](https://git.busybox.net/busybox)
 
 ## development dependencies
 - [wget](https://en.wikipedia.org/wiki/Wget)
