@@ -15,9 +15,9 @@ _ext_setup() {
     PATH="${PROJECT_ROOT}/cli:${PROJECT_ROOT}/core:$PATH"
     pwd <&2
     echo $PATH >&2
-    TEST_BUILD_DIR='/tmp/bats'
+    BATS_TEST_DIRNAME='/tmp/bats'
     TEST_UNDER_EXAMINATION="$(basename ${BATS_TEST_FILENAME%.*})"
-    TEST_CONCERN_DIR="${TEST_BUILD_DIR}/$(realpath "${BATS_TEST_FILENAME%.*}" --relative-to="${PROJECT_ROOT}")"
+    TEST_CONCERN_DIR="${BATS_TEST_DIRNAME}/$(realpath "${BATS_TEST_FILENAME%.*}" --relative-to="${PROJECT_ROOT}")"
     mkdir -pv "$TEST_CONCERN_DIR" && cd "$TEST_CONCERN_DIR" || exit "$?"
     FIRST_RUN_OF_TEST_UNDER_EXAMINATION="${TEST_CONCERN_DIR}/${TEST_UNDER_EXAMINATION}.first_run"
 }
