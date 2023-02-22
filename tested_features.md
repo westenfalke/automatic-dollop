@@ -1,5 +1,5 @@
 # Test Report
-## Tested Features 1..17
+## Tested Features 1..19
 - [x] ok 1 (add_element) adds one element to a namespaced bucket
 - [x] ok 2 (add_element) adds two elements to a namespaced bucket
 - [x] ok 3 (add_element) fails on calls without a paramerter
@@ -15,8 +15,10 @@
 - [x] ok 13 (maybe_add_namespace) adds a new uniq namespace
 - [x] ok 14 (maybe_add_namespace) fails if the namespace already exits
 - [x] ok 15 (maybe_add_namespace) fails on calls without a paramerter
-- [x] ok 16 (read_bucket) fails on calls without a paramerter
-- [x] ok 17 (template) fails on calls without a paramerter
+- [x] ok 16 (mkdwn2html) create html body from markdown oneliner (backingstore default)
+- [x] ok 17 (mkdwn2html) fails on calls without a paramerter
+- [x] ok 18 (read_bucket) fails on calls without a paramerter
+- [x] ok 19 (template) fails on calls without a paramerter
 
 ## Listing files and directories
 ``` bash
@@ -63,10 +65,18 @@
     │   │           ├── existing
     │   │           └── new
     │   └── maybe_add_namespace.first_run
+    ├── mkdwn2html
+    │   ├── manuel
+    │   │   └── maintained
+    │   │       └── documents
+    │   │           ├── index.html
+    │   │           ├── index.md
+    │   │           └── metadata.yaml
+    │   └── mkdwn2html.first_run
     ├── read_bucket
     │   └── read_bucket.first_run
     └── template
         └── template.first_run
 
-31 directories, 15 files
+35 directories, 19 files
 ```
