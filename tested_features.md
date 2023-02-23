@@ -1,24 +1,24 @@
 # Test Report
 ## Tested Features 1..19
-- [x] ok 1 (add_element->backingstore default) adds one element to a namespaced bucket
-- [x] ok 2 (add_element->backingstore default) adds two elements to a namespaced bucket
-- [x] ok 3 (add_element->backingstore default) fails on calls without a paramerter
-- [x] ok 4 (add_project->backingstore default) create a uniq namespace, an alias and main configuration
-- [x] ok 5 (add_project->backingstore default) fails if the namespace already exits
-- [x] ok 6 (add_project->backingstore default) fails on calls without a paramerter
-- [x] ok 7 (backingstore->default) fails if the not implemented
-- [x] ok 8 (backingstore->all) adds one element to a namespaced bucket
-- [x] ok 9 (backingstore->default) adds two elements to a namespaced bucket
-- [x] ok 10 (backingstore->all) fails on calls without a paramerter
-- [x] ok 11 (list_buckets->backingstore default) list buckets in full qualified a namespace
-- [x] ok 12 (list_buckets->backingstore default) fails on calls without a paramerter
-- [x] ok 13 (maybe_add_namespace->backingstore default) adds a new uniq namespace
-- [x] ok 14 (maybe_add_namespace->backingstore default) fails if the namespace already exits
-- [x] ok 15 (maybe_add_namespace->backingstore default) fails on calls without a paramerter
-- [x] ok 16 (mkdwn2html->backingstore default) create html body from markdown oneliner
-- [x] ok 17 (mkdwn2html->backingstore default) fails on calls without a paramerter
-- [x] ok 18 (read_bucket->backingstore default) fails on calls without a paramerter
-- [x] ok 19 (template->backingstore default) fails on calls without a paramerter
+- [x] ok 1 (default.add_element) adds one element to a namespaced bucket
+- [x] ok 2 (default.add_element) adds two elements to a namespaced bucket
+- [x] ok 3 (default.add_element) fails on calls without a paramerter
+- [x] ok 4 (default.add_project) create a uniq namespace, an alias and main configuration
+- [x] ok 5 (default.add_project) fails if the namespace already exits
+- [x] ok 6 (default.add_project) fails on calls without a paramerter
+- [x] ok 7 (backingstore->unknown_backingstore) fails if the not implemented
+- [x] ok 8 (backingstore->default->add_element) adds one element to a namespaced bucket
+- [x] ok 9 (backingstore->default->add_element) adds two elements to a namespaced bucket
+- [x] ok 10 (backingstore) fails on calls without a paramerter
+- [x] ok 11 (default.list_buckets) list buckets in full qualified a namespace
+- [x] ok 12 (default.list_buckets) fails on calls without a paramerter
+- [x] ok 13 (default.maybe_add_namespace) adds a new uniq namespace
+- [x] ok 14 (default.maybe_add_namespace) fails if the namespace already exits
+- [x] ok 15 (default.maybe_add_namespace) fails on calls without a paramerter
+- [x] ok 16 (default.mkdwn2html) create html body from markdown oneliner
+- [x] ok 17 (default.mkdwn2html) fails on calls without a paramerter
+- [x] ok 18 (default.read_bucket) fails on calls without a paramerter
+- [x] ok 19 (default.template) fails on calls without a paramerter
 
 ## Listing files and directories
 ``` bash

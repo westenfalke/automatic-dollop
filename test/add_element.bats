@@ -9,7 +9,7 @@ setup() {
     fi
 }
 
-@test "(${MODULE_NAME}->backingstore default) adds one element to a namespaced bucket" {
+@test "(default.${MODULE_NAME}) adds one element to a namespaced bucket" {
     declare -r bucket_namespace='full.qualified.namespace.one_element'
     declare -r bucket_name='a_namespaced_bucket'
     declare -r payload='dohikey'
@@ -31,7 +31,7 @@ setup() {
 
 }
 
-@test "(${MODULE_NAME}->backingstore default) adds two elements to a namespaced bucket" {
+@test "(default.${MODULE_NAME}) adds two elements to a namespaced bucket" {
     declare -r bucket_namespace='full.qualified.namespace.two_elements'
     declare -r bucket_name='a_namespaced_bucket'
     declare -r payload='dohikey'
@@ -56,7 +56,7 @@ ${payload}"
 
 }
 
-@test "(${MODULE_NAME}->backingstore default) fails on calls without a paramerter" {
+@test "(default.${MODULE_NAME}) fails on calls without a paramerter" {
     run ${TEST_UNDER_EXAMINATION}.bash
     assert_failure 128
 }

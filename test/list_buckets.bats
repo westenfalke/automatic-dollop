@@ -12,7 +12,7 @@ setup() {
     fi
 }
 
-@test "(${MODULE_NAME}->backingstore default) list buckets in full qualified a namespace" {
+@test "(default.${MODULE_NAME}) list buckets in full qualified a namespace" {
     declare -r namespace="full.qualified.namespace"
     declare -r namespace_alias='ssg_test_project'
     declare -r backingstore='default'
@@ -51,7 +51,7 @@ setup() {
     assert_output --partial "${buckets[2]}"
 }
 
-@test "(${MODULE_NAME}->backingstore default) fails on calls without a paramerter" {
+@test "(default.${MODULE_NAME}) fails on calls without a paramerter" {
     run "${TEST_UNDER_EXAMINATION}.bash" 
     assert_failure 128
 }

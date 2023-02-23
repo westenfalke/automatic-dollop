@@ -12,7 +12,7 @@ setup() {
     fi
 }
 
-@test "(${MODULE_NAME}->backingstore default) fails on calls without a paramerter" {
+@test "(default.${MODULE_NAME}) fails on calls without a paramerter" {
     run "${TEST_UNDER_EXAMINATION}.bash"
     assert_failure 128
 }

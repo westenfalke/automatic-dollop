@@ -12,7 +12,7 @@ setup() {
     fi
 }
 
-@test "(${MODULE_NAME}->default) fails if the not implemented" {
+@test "(${MODULE_NAME}->unknown_backingstore) fails if the not implemented" {
     declare -r bucket_namespace='namespace.not_implemented'
     declare -r bucket_name='a_namespaced_bucket'
     declare -r payload='dohikey'
@@ -20,7 +20,7 @@ setup() {
     declare -r type='wireframe'
     declare -r fqn="${bucket_namespace}/${bucket_name}"
     declare -r parameter="( [payload]='$payload' \
-                            [request]='${TEST_UNDER_EXAMINATION}.bash' \
+                            [request]='does_not_matter.bash' \
                             [bucket]=\"([backingstore]='$backingstore_not_implemented' \
                                         [bucket_name]='$bucket_name' \
                                         [type]='$type' \
@@ -32,7 +32,7 @@ setup() {
     assert [ ! -e "${fqn}" ]
 }
 
-@test "(${MODULE_NAME}->all) adds one element to a namespaced bucket" {
+@test "(${MODULE_NAME}->default->add_element) adds one element to a namespaced bucket" {
     declare -r bucket_namespace='full.qualified.namespace.one_element'
     declare -r bucket_name='a_namespaced_bucket'
     declare -r payload='dohikey'
@@ -55,7 +55,7 @@ setup() {
 
 }
 
-@test "(${MODULE_NAME}->default) adds two elements to a namespaced bucket" {
+@test "(${MODULE_NAME}->default->add_element) adds two elements to a namespaced bucket" {
     declare -r bucket_namespace='full.qualified.namespace.two_elements'
     declare -r bucket_name='a_namespaced_bucket'
     declare -r payload='dohikey'
@@ -82,7 +82,7 @@ ${payload}"
 
 }
 
-@test "(${MODULE_NAME}->all) fails on calls without a paramerter" {
+@test "(${MODULE_NAME}) fails on calls without a paramerter" {
     run ${TEST_UNDER_EXAMINATION}.bash
     assert_failure 128
 }
