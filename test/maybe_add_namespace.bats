@@ -8,7 +8,7 @@ setup() {
     fi
 }
 
-@test "(default.${MODULE_NAME}) adds a new uniq namespace" {
+@test "(backingstore.default.${MODULE_NAME}) adds a new uniq namespace" {
     TEST_PARAMS_AS_AN_AARRAY="([namesapce]="full.qualified.namespace.new" \
                                [namespace_alias]="ssg_test_project" \
                                [bucket_name]="bucket" \
@@ -18,7 +18,7 @@ setup() {
     assert_success
 }
 
-@test "(default.${MODULE_NAME}) fails if the namespace already exits" {
+@test "(backingstore.default.${MODULE_NAME}) fails if the namespace already exits" {
     TEST_PARAMS_AS_AN_AARRAY="([namesapce]="full.qualified.namespace.existing" [namespace_alias]="ssg_test_project" [bucket_name]="bucket"   [backingstore]='default')"
     eval "declare -rA test_arguments=$TEST_PARAMS_AS_AN_AARRAY"
     mkdir -pv ${test_arguments[namesapce]//.//}
@@ -26,7 +26,7 @@ setup() {
     assert_failure 2
 }
 
-@test "(default.${MODULE_NAME}) fails on calls without a paramerter" {
+@test "(backingstore.default.${MODULE_NAME}) fails on calls without a paramerter" {
     run "${TEST_UNDER_EXAMINATION}.bash"
     assert_failure 128
 }

@@ -8,7 +8,7 @@ setup() {
     fi
 }
 
-@test "(default.${MODULE_NAME}) create html body from markdown oneliner" {
+@test "(backingstore.default.${MODULE_NAME}) create html body from markdown oneliner" {
     # create a simple markdown document with just on line of text 
     # transform the document into html (body only)
     # find the text in the html document
@@ -42,7 +42,7 @@ setup() {
     assert_output --partial "${oneliner}"
 }
 
-@test "(default.${MODULE_NAME}) fails on calls without a paramerter" {
+@test "(backingstore.default.${MODULE_NAME}) fails on calls without a paramerter" {
     run "${TEST_UNDER_EXAMINATION}.bash"
     assert_failure 128
 }
