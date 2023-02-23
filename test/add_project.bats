@@ -10,7 +10,7 @@ setup() {
     fi
 }
 
-@test "(backingstore.default.${MODULE_NAME}) create a uniq namespace, an alias and main configuration" {
+@test "(cli.${MODULE_NAME} backingstore='default') create a uniq namespace, an alias and main configuration" {
     declare -r namespace='full.qualified.namespace.project_new'
     declare -r namespace_alias='ssg_test_project'
     declare -r bucket_name='main.config'
@@ -29,7 +29,7 @@ setup() {
     assert_output --partial "backingstore=${default}"
 }
 
-@test "(backingstore.default.${MODULE_NAME}) fails if the namespace already exits" {
+@test "(cli.${MODULE_NAME} backingstore='default') fails if the namespace already exits" {
     declare -r namespace='full.qualified.namespace.project_existing'
     declare -r namespace_alias='ssg_test_project'
     declare -r bucket_name='main.config'
@@ -44,7 +44,7 @@ setup() {
     assert_failure 2
 }
 
-@test "(backingstore.default.${MODULE_NAME}) fails on calls without a paramerter" {
+@test "(cli.${MODULE_NAME}) fails on calls without a paramerter" {
     run "${TEST_UNDER_EXAMINATION}.bash"
     assert_failure 128
 }
