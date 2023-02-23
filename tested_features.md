@@ -1,5 +1,5 @@
 # Test Report
-## Tested Features 1..19
+## Tested Features 1..20
 - [x] ok 1 (backingstore.default.add_element) adds one element to a namespaced bucket
 - [x] ok 2 (backingstore.default.add_element) adds two elements to a namespaced bucket
 - [x] ok 3 (backingstore.default.add_element) fails on calls without a paramerter
@@ -10,15 +10,16 @@
 - [x] ok 8 (backingstore->default->add_element) adds one element to a namespaced bucket
 - [x] ok 9 (backingstore->default->add_element) adds two elements to a namespaced bucket
 - [x] ok 10 (backingstore) fails on calls without a paramerter
-- [x] ok 11 (backingstore.default.list_buckets) list buckets in full qualified a namespace
-- [x] ok 12 (backingstore.default.list_buckets) fails on calls without a paramerter
-- [x] ok 13 (backingstore.default.maybe_add_namespace) adds a new uniq namespace
-- [x] ok 14 (backingstore.default.maybe_add_namespace) fails if the namespace already exits
-- [x] ok 15 (backingstore.default.maybe_add_namespace) fails on calls without a paramerter
-- [x] ok 16 (backingstore.default.mkdwn2html) create html body from markdown oneliner
-- [x] ok 17 (backingstore.default.mkdwn2html) fails on calls without a paramerter
-- [x] ok 18 (backingstore.default.read_bucket) fails on calls without a paramerter
-- [x] ok 19 (backingstore.default.template) fails on calls without a paramerter
+- [x] ok 11 (example_project backingstore='default') create config for a new website project
+- [x] ok 12 (backingstore.default.list_buckets) list buckets in full qualified a namespace
+- [x] ok 13 (backingstore.default.list_buckets) fails on calls without a paramerter
+- [x] ok 14 (backingstore.default.maybe_add_namespace) adds a new uniq namespace
+- [x] ok 15 (backingstore.default.maybe_add_namespace) fails if the namespace already exits
+- [x] ok 16 (backingstore.default.maybe_add_namespace) fails on calls without a paramerter
+- [x] ok 17 (backingstore.default.mkdwn2html) create html body from markdown oneliner
+- [x] ok 18 (backingstore.default.mkdwn2html) fails on calls without a paramerter
+- [x] ok 19 (backingstore.default.read_bucket) fails on calls without a paramerter
+- [x] ok 20 (backingstore.default.template) fails on calls without a paramerter
 
 ## Listing files and directories
 ``` bash
@@ -50,6 +51,12 @@
     │   │           └── two_elements
     │   │               └── a_namespaced_bucket
     │   └── backingstore.first_run
+    ├── example_project
+    │   ├── single
+    │   │   └── site
+    │   │       └── project
+    │   │           └── main.config
+    │   └── example_project.first_run
     ├── list_buckets
     │   ├── full
     │   │   └── qualified
@@ -78,5 +85,5 @@
     └── template
         └── template.first_run
 
-35 directories, 19 files
+39 directories, 21 files
 ```
