@@ -6,7 +6,7 @@
 - [x] ok 4 (cli.add_project backingstore='default') create a uniq namespace, an alias and main configuration
 - [x] ok 5 (cli.add_project backingstore='default') fails if the namespace already exits
 - [x] ok 6 (cli.add_project) fails on calls without a paramerter
-- [x] ok 7 (backingstore->unknown_backingstore) fails if the not implemented
+- [x] ok 7 (backingstore->not.available->request) fails if the not implemented
 - [x] ok 8 (backingstore->default->add_element) adds one element to a namespaced bucket
 - [x] ok 9 (backingstore->default->add_element) adds two elements to a namespaced bucket
 - [x] ok 10 (backingstore) fails on calls without a paramerter

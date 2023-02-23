@@ -12,7 +12,7 @@ setup() {
     fi
 }
 
-@test "(${MODULE_NAME}->unknown_backingstore) fails if the not implemented" {
+@test "(${MODULE_NAME}->not.available->request) fails if the not implemented" {
     declare -r bucket_namespace='namespace.not_implemented'
     declare -r bucket_name='a_namespaced_bucket'
     declare -r payload='dohikey'
