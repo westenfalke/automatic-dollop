@@ -7,7 +7,7 @@ mkdwn2html() {
         eval "declare -A T=$@"
         eval "declare -rA T_bucket=${T[bucket]}"
         eval "declare -rA T_parameter=${T[payload]}"
-        #declare -r kind=${T_bucket[backingstore_kind]}
+        #declare -r backingstore=${T_bucket[backingstore]}
         pwd >&2
         declare -r document_dir="${T_bucket[namespace]/.//}/${T_bucket[bucket_name]}"
         printf "%s\n" "${document_dir}/${T_parameter[metadata_file]}" >&2
