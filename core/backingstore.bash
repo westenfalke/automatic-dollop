@@ -6,8 +6,8 @@ backingstore() {
     else
         eval "declare -A T=$@"
         eval "declare -rA T_bucket=${T[bucket]}"
-        declare -r kind=${T_bucket[backingstore_kind]}    
-        declare -r backingstore_path="$( dirname "${BASH_SOURCE[0]}" )/backingstore/${kind}"
+        declare -r backingstore=${T_bucket[backingstore]}    
+        declare -r backingstore_path="$( dirname "${BASH_SOURCE[0]}" )/backingstore/${backingstore}"
         printf -v cmd "%s/%s" "$backingstore_path" "${T[request]}"
         if [[ -e "$cmd" ]] ; then
             "${cmd}" "$@"

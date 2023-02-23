@@ -7,15 +7,15 @@ add_project() {
     else
         maybe_add_namespace.bash "$@"
         eval "declare -rA project=$@"
-        add_element.bash "([payload]='backingstore=${project[backingstore_kind]}' \
+        add_element.bash "([payload]='backingstore=${project[backingstore]}' \
                             [bucket]=\"( \
-                                [backingstore_kind]='${project[backingstore_kind]}' \
+                                [backingstore]='${project[backingstore]}' \
                                 [bucket_name]='${project[bucket_name]}' \
                                 [type]='wireframe' \
                                 [namespace]='${project[namesapce]}')\" )"    
         add_element.bash "([payload]='namespace_alias=${project[namespace_alias]}' \
                             [bucket]=\"( \
-                                [backingstore_kind]='${project[backingstore_kind]}' \
+                                [backingstore]='${project[backingstore]}' \
                                 [bucket_name]='${project[bucket_name]}' \
                                 [type]='wireframe' \
                                 [namespace]='${project[namesapce]}')\" )"    

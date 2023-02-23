@@ -7,7 +7,7 @@ list_buckets() {
     else
         eval "declare -rA T=$@"
         eval "declare -rA T_bucket=${T[bucket]}"
-        declare -r backingstore=${T_bucket[backingstore_kind]}
+        declare -r backingstore=${T_bucket[backingstore]}
         printf "%s\n" "$(declare -p T)" >&2
         pushd "${T_bucket[namespace]//.//}"
         find ./ -maxdepth 1 -type f | xargs -n 1 basename

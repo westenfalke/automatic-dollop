@@ -12,7 +12,7 @@ setup() {
     fi
 }
 
-@test "(${MODULE_NAME}) list buckets in full qualified a namespace" {
+@test "(${MODULE_NAME}->backingstore default) list buckets in full qualified a namespace" {
     declare -r namespace="full.qualified.namespace"
     declare -r namespace_alias='ssg_test_project'
     declare -r backingstore='default'
@@ -21,25 +21,25 @@ setup() {
     run add_project.bash "([namesapce]='$namespace' \
                             [namespace_alias]='$namespace_alias' \
                             [bucket_name]='${buckets[0]}' \
-                            [backingstore_kind]='$backingstore' )"
+                            [backingstore]='$backingstore' )"
     assert_success
     add_element.bash "([payload]='foo=bar' \
                         [bucket]=\"( \
-                            [backingstore_kind]='$backingstore' \
+                            [backingstore]='$backingstore' \
                             [bucket_name]='${buckets[1]}' \
                             [type]='wireframe' \
                             [namespace]='$namespace')\" )"    
     assert_success
     add_element.bash "([payload]='bat=baz' \
                         [bucket]=\"( \
-                            [backingstore_kind]='$backingstore' \
+                            [backingstore]='$backingstore' \
                             [bucket_name]='${buckets[2]}' \
                             [type]='wireframe' \
                             [namespace]='$namespace')\" )"    
     assert_success
     run "${TEST_UNDER_EXAMINATION}.bash" "([payload]='cmd=list' \
                                             [bucket]=\"( \
-                                                [backingstore_kind]='$backingstore' \
+                                                [backingstore]='$backingstore' \
                                                 [bucket_name]='*' \
                                                 [type]='wireframe' \
                                                 [namespace]='$namespace')\" )"    
@@ -51,7 +51,7 @@ setup() {
     assert_output --partial "${buckets[2]}"
 }
 
-@test "(${MODULE_NAME}) fails on calls without a paramerter" {
+@test "(${MODULE_NAME}->backingstore default) fails on calls without a paramerter" {
     run "${TEST_UNDER_EXAMINATION}.bash" 
     assert_failure 128
 }

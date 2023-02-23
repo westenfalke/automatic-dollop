@@ -10,7 +10,7 @@ setup() {
     fi
 }
 
-@test "(${MODULE_NAME}) create a uniq namespace, an alias and main configuration" {
+@test "(${MODULE_NAME}->backingstore default) create a uniq namespace, an alias and main configuration" {
     declare -r namespace='full.qualified.namespace.project_new'
     declare -r namespace_alias='ssg_test_project'
     declare -r bucket_name='main.config'
@@ -18,7 +18,7 @@ setup() {
     parameter="([namesapce]='$namespace' \
                 [namespace_alias]='$namespace_alias' \
                 [bucket_name]='$bucket_name' \
-                [backingstore_kind]='$backingstore' )"
+                [backingstore]='$backingstore' )"
     
     run ${TEST_UNDER_EXAMINATION}.bash "$parameter"
     assert_success
@@ -29,7 +29,7 @@ setup() {
     assert_output --partial "backingstore=${default}"
 }
 
-@test "(${MODULE_NAME}) fails if the namespace already exits" {
+@test "(${MODULE_NAME}->backingstore default) fails if the namespace already exits" {
     declare -r namespace='full.qualified.namespace.project_existing'
     declare -r namespace_alias='ssg_test_project'
     declare -r bucket_name='main.config'
@@ -37,14 +37,14 @@ setup() {
     parameter="([namesapce]='$namespace' \
                 [namespace_alias]='$namespace_alias' \
                 [bucket_name]='$bucket_name' \
-                [backingstore_kind]='$backingstore' )"
+                [backingstore]='$backingstore' )"
 
     maybe_add_namespace.bash "$parameter"
     run ${TEST_UNDER_EXAMINATION}.bash "$parameter"
     assert_failure 2
 }
 
-@test "(${MODULE_NAME}) fails on calls without a paramerter" {
+@test "(${MODULE_NAME}->backingstore default) fails on calls without a paramerter" {
     run "${TEST_UNDER_EXAMINATION}.bash"
     assert_failure 128
 }

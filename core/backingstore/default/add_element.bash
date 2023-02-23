@@ -6,7 +6,7 @@ add_element() {
     else
         eval "declare -A T=$@"
         eval "declare -rA T_bucket=${T[bucket]}"
-        declare -r backingstore=${T_bucket[backingstore_kind]}
+        declare -r backingstore=${T_bucket[backingstore]}
         # namespace to path, avoid leaking the path seperator as an implementaion detail      
         declare -r dir_name="${T_bucket[namespace]//.//}"
         mkdir -pv "$dir_name"
