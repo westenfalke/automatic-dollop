@@ -5,20 +5,24 @@ add_project() {
     if [[ "$#" != '1' ]]; then
         exit 128
     else
-        maybe_add_namespace.bash "$@"
-        eval "declare -rA project=$@"
-        add_element.bash "([payload]='backingstore=${project[backingstore]}' \
-                            [bucket]=\"( \
-                                [backingstore]='${project[backingstore]}' \
-                                [bucket_name]='${project[bucket_name]}' \
-                                [type]='wireframe' \
-                                [namespace]='${project[namesapce]}')\" )"    
-        add_element.bash "([payload]='namespace_alias=${project[namespace_alias]}' \
-                            [bucket]=\"( \
-                                [backingstore]='${project[backingstore]}' \
-                                [bucket_name]='${project[bucket_name]}' \
-                                [type]='wireframe' \
-                                [namespace]='${project[namesapce]}')\" )"    
+        eval "declare -A project=$@"
+        project[bucket]="(  [backingstore]='${project[backingstore]}' \
+                            [bucket_name]='${project[bucket_name]}' \
+                            [type]='wireframe' \
+                            [namespace]='${project[namesapce]}' )"
+        
+        project[payload]="n.a."
+        project[request]="maybe_add_namespace.bash"
+        backingstore.bash "$(declare -p project|sed 's/^.*project=//')"
+        
+        project[payload]="backingstore=${project[backingstore]}"
+        project[request]="add_element.bash"
+        backingstore.bash "$(declare -p project|sed 's/^.*project=//')"
+
+        project[payload]="namespace_alias=${project[namespace_alias]}"
+        project[request]="add_element.bash"
+        backingstore.bash "$(declare -p project|sed 's/^.*project=//')"
+
     fi
 }
 
