@@ -8,20 +8,15 @@ setup() {
     fi
 }
 
-@test "(backingstore.default.${MODULE_NAME}) create html body from markdown oneliner" {
-    # create a simple markdown document with just on line of text 
-    # transform the document into html (body only)
-    # find the text in the html document
-    # !!! No syntax check, hence ths isn't a test of the transformator
-    # !!! but of getting the parameter across
-    
-    declare -r bucket_namespace='manuel.maintained'
+@test "(backingstore.default.${MODULE_NAME}) create html body from markdown is_the_same_as_input" {
+   
+    declare -r bucket_namespace='directory.for.user.maintained'
     declare -r bucket_name='documents'
-    declare -r documents_dir="${bucket_namespace/.//}/${bucket_name}"
+    declare -r documents_dir="${bucket_namespace//.//}/${bucket_name}"
     mkdir -pv "${documents_dir}"
     declare -r input_file='index.md'
-    declare -r oneliner='Hello westenfalke'
-    printf "%s" "${oneliner}" > "${documents_dir}/${input_file}"
+    declare -r is_the_same_as_input='Test in/output prameter only.'
+    printf "%s\n" "${is_the_same_as_input}" > "${documents_dir}/${input_file}"
     declare -r metadata_file='metadata.yaml'
     touch "${documents_dir}/${metadata_file}"
     declare -r output_file='index.html'
@@ -39,7 +34,7 @@ setup() {
     run "${TEST_UNDER_EXAMINATION}.bash" "$parameter"
     assert_success
     run cat ${documents_dir}/${output_file}
-    assert_output --partial "${oneliner}"
+    assert_output --partial "${is_the_same_as_input}"
 }
 
 @test "(backingstore.default.${MODULE_NAME}) fails on calls without a paramerter" {

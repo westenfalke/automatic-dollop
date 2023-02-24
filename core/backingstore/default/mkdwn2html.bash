@@ -9,7 +9,7 @@ mkdwn2html() {
         eval "declare -rA T_parameter=${T[payload]}"
         #declare -r backingstore=${T_bucket[backingstore]}
         pwd >&2
-        declare -r document_dir="${T_bucket[namespace]/.//}/${T_bucket[bucket_name]}"
+        declare -r document_dir="${T_bucket[namespace]//.//}/${T_bucket[bucket_name]}"
         printf "%s\n" "${document_dir}/${T_parameter[metadata_file]}" >&2
         pandoc \
             --from=markdown "${document_dir}/${T_parameter[input_file]}" \
