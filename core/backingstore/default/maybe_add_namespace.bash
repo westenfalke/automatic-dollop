@@ -8,7 +8,6 @@ maybe_add_namespace() {
         declare -r backingstore="${T[backingstore]}"
         declare -r project_directory="${T[namesapce]//.//}"              
         if [[ -e "$project_directory" ]]; then
-            # thing about returning an alternative namespace
             exit 2
         else
             mkdir -pv "$project_directory"
