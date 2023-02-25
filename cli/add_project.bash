@@ -9,7 +9,7 @@ add_project() {
         project[bucket]="(  [backingstore]='${project[backingstore]}' \
                             [bucket_name]='${project[bucket_name]}' \
                             [type]='wireframe' \
-                            [namespace]='${project[namesapce]}' )"
+                            [namespace]='${project[namespace]}' )"
         
         project[payload]="n.a."
         project[request]="maybe_add_namespace.bash"
