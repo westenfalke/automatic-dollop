@@ -1,5 +1,5 @@
 # Test Report
-## Tested Features 1..20
+## Tested Features 1..21
 - [x] ok 1 (backingstore.default.add_element) adds one element to a namespaced bucket
 - [x] ok 2 (backingstore.default.add_element) adds two elements to a namespaced bucket
 - [x] ok 3 (backingstore.default.add_element) fails on calls without a paramerter
@@ -16,10 +16,11 @@
 - [x] ok 14 (backingstore.default.maybe_add_namespace) adds a new uniq namespace
 - [x] ok 15 (backingstore.default.maybe_add_namespace) fails if the namespace already exits
 - [x] ok 16 (backingstore.default.maybe_add_namespace) fails on calls without a paramerter
-- [x] ok 17 (backingstore.default.mkdwn2html) create html body from markdown oneliner
-- [x] ok 18 (backingstore.default.mkdwn2html) fails on calls without a paramerter
-- [x] ok 19 (backingstore.default.read_bucket) fails on calls without a paramerter
-- [x] ok 20 (backingstore.default.template) fails on calls without a paramerter
+- [x] ok 17 (backingstore.default.mkdwn2html) create html body from markdown
+- [x] ok 18 (backingstore.default.mkdwn2html) create html from markdown with a title form metadata
+- [x] ok 19 (backingstore.default.mkdwn2html) fails on calls without a paramerter
+- [x] ok 20 (backingstore.default.read_bucket) fails on calls without a paramerter
+- [x] ok 21 (backingstore.default.template) fails on calls without a paramerter
 
 ## Listing files and directories
 ``` bash
@@ -73,17 +74,25 @@
     │   │           └── new
     │   └── maybe_add_namespace.first_run
     ├── mkdwn2html
-    │   ├── manuel
-    │   │   └── maintained
-    │   │       └── documents
-    │   │           ├── index.html
-    │   │           ├── index.md
-    │   │           └── metadata.yaml
+    │   ├── directory
+    │   │   └── for
+    │   │       └── user
+    │   │           └── maintained
+    │   │               ├── metadata
+    │   │               │   └── documents
+    │   │               │       ├── metadata.yaml
+    │   │               │       ├── onliner.md
+    │   │               │       └── title_head_and_body.html
+    │   │               └── only_body
+    │   │                   └── documents
+    │   │                       ├── just_one_paragraph.html
+    │   │                       ├── metadata.yaml
+    │   │                       └── onliner.md
     │   └── mkdwn2html.first_run
     ├── read_bucket
     │   └── read_bucket.first_run
     └── template
         └── template.first_run
 
-39 directories, 21 files
+44 directories, 24 files
 ```
