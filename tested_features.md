@@ -1,31 +1,40 @@
 # Test Report
-## Tested Features 1..21
-- [x] ok 1 (backingstore.default.add_element) adds one element to a namespaced bucket
-- [x] ok 2 (backingstore.default.add_element) adds two elements to a namespaced bucket
-- [x] ok 3 (backingstore.default.add_element) fails on calls without a paramerter
-- [x] ok 4 (cli.add_project backingstore='default') create a uniq namespace, an alias and main configuration
-- [x] ok 5 (cli.add_project backingstore='default') fails if the namespace already exits
-- [x] ok 6 (cli.add_project) fails on calls without a paramerter
-- [x] ok 7 (backingstore->not.available->request) fails if the not implemented
-- [x] ok 8 (backingstore->default->add_element) adds one element to a namespaced bucket
-- [x] ok 9 (backingstore->default->add_element) adds two elements to a namespaced bucket
-- [x] ok 10 (backingstore) fails on calls without a paramerter
-- [x] ok 11 (example_project backingstore='default') create config for a new website project
-- [x] ok 12 (backingstore.default.list_buckets) list buckets in full qualified a namespace
-- [x] ok 13 (backingstore.default.list_buckets) fails on calls without a paramerter
-- [x] ok 14 (backingstore.default.maybe_add_namespace) adds a new uniq namespace
-- [x] ok 15 (backingstore.default.maybe_add_namespace) fails if the namespace already exits
-- [x] ok 16 (backingstore.default.maybe_add_namespace) fails on calls without a paramerter
-- [x] ok 17 (backingstore.default.mkdwn2html) create html body from markdown
-- [x] ok 18 (backingstore.default.mkdwn2html) create html from markdown with a title form metadata
-- [x] ok 19 (backingstore.default.mkdwn2html) fails on calls without a paramerter
-- [x] ok 20 (backingstore.default.read_bucket) fails on calls without a paramerter
-- [x] ok 21 (backingstore.default.template) fails on calls without a paramerter
+## Tested Features 1..23
+- [x] ok 1 (cli.add_document backingstore='default') add a document to a document_dir 
+- [x] ok 2 (cli.add_document) fails on calls without a paramerter
+- [x] ok 3 (backingstore.default.add_element) adds one element to a namespaced bucket
+- [x] ok 4 (backingstore.default.add_element) adds two elements to a namespaced bucket
+- [x] ok 5 (backingstore.default.add_element) fails on calls without a paramerter
+- [x] ok 6 (cli.add_project backingstore='default') create a uniq directory, an alias and configuration file
+- [x] ok 7 (cli.add_project backingstore='default') fails if the project_dir already exits
+- [x] ok 8 (cli.add_project) fails on calls without a paramerter
+- [x] ok 9 (backingstore->not.available->request) fails if the not implemented
+- [x] ok 10 (backingstore->default->add_element) adds one element to a namespaced bucket
+- [x] ok 11 (backingstore->default->add_element) adds two elements to a namespaced bucket
+- [x] ok 12 (backingstore) fails on calls without a paramerter
+- [x] ok 13 (example_project backingstore='default') create config for a new website project
+- [x] ok 14 (backingstore.default.list_buckets) list buckets in full qualified a namespace
+- [x] ok 15 (backingstore.default.list_buckets) fails on calls without a paramerter
+- [x] ok 16 (backingstore.default.maybe_add_namespace) adds a new uniq namespace
+- [x] ok 17 (backingstore.default.maybe_add_namespace) fails if the namespace already exits
+- [x] ok 18 (backingstore.default.maybe_add_namespace) fails on calls without a paramerter
+- [x] ok 19 (backingstore.default.mkdwn2html) create html body from markdown
+- [x] ok 20 (backingstore.default.mkdwn2html) create html from markdown with a title form metadata
+- [x] ok 21 (backingstore.default.mkdwn2html) fails on calls without a paramerter
+- [x] ok 22 (backingstore.default.read_bucket) fails on calls without a paramerter
+- [x] ok 23 (backingstore.default.template) fails on calls without a paramerter
 
 ## Listing files and directories
 ``` bash
 /tmp/bats
 └── test
+    ├── add_document
+    │   ├── user
+    │   │   └── maintained
+    │   │       └── documents
+    │   │           └── index.md
+    │   ├── add_document.first_run
+    │   └── content_to_add.md
     ├── add_element
     │   ├── full
     │   │   └── qualified
@@ -36,12 +45,11 @@
     │   │               └── a_namespaced_bucket
     │   └── add_element.first_run
     ├── add_project
-    │   ├── full
-    │   │   └── qualified
-    │   │       └── namespace
-    │   │           ├── project_existing
-    │   │           └── project_new
-    │   │               └── main.config
+    │   ├── project
+    │   │   └── dir
+    │   │       ├── existing
+    │   │       └── new
+    │   │           └── main.config
     │   └── add_project.first_run
     ├── backingstore
     │   ├── full
@@ -94,5 +102,5 @@
     └── template
         └── template.first_run
 
-44 directories, 24 files
+47 directories, 27 files
 ```
