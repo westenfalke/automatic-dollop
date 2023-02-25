@@ -10,31 +10,31 @@ setup() {
     fi
 }
 
-@test "(cli.${MODULE_NAME} backingstore='default') create a uniq namespace, an alias and main configuration" {
-    declare -r namespace='full.qualified.namespace.project_new'
+@test "(cli.${MODULE_NAME} backingstore='default') create a uniq directory, an alias and configuration file" {
+    declare -r project_dir='project.dir.new'
     declare -r namespace_alias='ssg_test_project'
     declare -r bucket_name='main.config'
     declare -r backingstore='default'
-    parameter="([namesapce]='$namespace' \
+    parameter="([namespace]='$project_dir' \
                 [namespace_alias]='$namespace_alias' \
                 [bucket_name]='$bucket_name' \
                 [backingstore]='$backingstore' )"
     
     run ${TEST_UNDER_EXAMINATION}.bash "$parameter"
     assert_success
-    assert [ -d "${namespace//.//}" ]
-    assert [ -e "${namespace//.//}/${bucket_name}" ]
-    run cat "${namespace//.//}/${bucket_name}"
+    assert [ -d "${project_dir//.//}" ]
+    assert [ -e "${project_dir//.//}/${bucket_name}" ]
+    run cat "${project_dir//.//}/${bucket_name}"
     assert_output --partial "namespace_alias=${namespace_alias}"
     assert_output --partial "backingstore=${default}"
 }
 
-@test "(cli.${MODULE_NAME} backingstore='default') fails if the namespace already exits" {
-    declare -r namespace='full.qualified.namespace.project_existing'
+@test "(cli.${MODULE_NAME} backingstore='default') fails if the project_dir already exits" {
+    declare -r project_dir='project.dir.existing'
     declare -r namespace_alias='ssg_test_project'
     declare -r bucket_name='main.config'
     declare -r backingstore='default'
-    parameter="([namesapce]='$namespace' \
+    parameter="([namespace]='$project_dir' \
                 [namespace_alias]='$namespace_alias' \
                 [bucket_name]='$bucket_name' \
                 [backingstore]='$backingstore' )"

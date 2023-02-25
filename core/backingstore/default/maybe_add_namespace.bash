@@ -6,7 +6,7 @@ maybe_add_namespace() {
     else
         eval "declare -A T=$@"
         declare -r backingstore="${T[backingstore]}"
-        declare -r project_directory="${T[namesapce]//.//}"              
+        declare -r project_directory="${T[namespace]//.//}"              
         if [[ -e "$project_directory" ]]; then
             exit 2
         else

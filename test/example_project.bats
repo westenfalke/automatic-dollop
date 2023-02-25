@@ -1,8 +1,5 @@
 #!/usr/bin/env bats
 MODULE_NAME="$(basename ${BATS_TEST_FILENAME%.*})"
-# TEST_UNDER_EXAMINATION: template.bash
-# keep ${FUNCNAME} and 'basename' in sync
-# function will be launched only if not sourced 
 setup() {
     load 'test_helper/ext-setup'
     _ext_and_backingstore_default_setup
@@ -19,7 +16,7 @@ setup() {
     declare -r namespace_alias='ssp'
     declare -r bucket_name='main.config'
     declare -r backingstore='default'
-    parameter="([namesapce]='$namespace' \
+    parameter="([namespace]='$namespace' \
                 [namespace_alias]='$namespace_alias' \
                 [bucket_name]='$bucket_name' \
                 [backingstore]='$backingstore' )"

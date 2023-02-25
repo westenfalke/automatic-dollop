@@ -18,7 +18,7 @@ setup() {
     declare -r backingstore='default'
     declare -ra buckets=( bucket_00 bucket_01 bucket_02 )
  
-    run add_project.bash "([namesapce]='$namespace' \
+    run add_project.bash "([namespace]='$namespace' \
                             [namespace_alias]='$namespace_alias' \
                             [bucket_name]='${buckets[0]}' \
                             [backingstore]='$backingstore' )"
