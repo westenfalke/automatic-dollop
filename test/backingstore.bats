@@ -67,7 +67,6 @@ setup() {
                                         [bucket_name]='$bucket_name' \
                                         [type]='$type' \
                                         [namespace]='$bucket_namespace')\" )"
-    : run ${TEST_UNDER_EXAMINATION}.bash "$parameter"
     run backingstore.bash "$parameter"
     assert_success
     assert [ -d "${bucket_namespace//.//}" ] 
