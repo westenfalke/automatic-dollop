@@ -10,7 +10,7 @@ setup() {
     fi
 }
 
-@test "(cli.${MODULE_NAME} backingstore='default') add a document to a document_dir " {
+@test "(backingstore.default.${MODULE_NAME}) add a document to a document_dir " {
 
     declare -r document_dir='user.maintained.documents'
     declare -r namespace_alias='document_dir'
@@ -34,7 +34,7 @@ setup() {
     assert_success
 }
 
-@test "(cli.${MODULE_NAME}) fails on calls without a paramerter" {
+@test "(backingstore.default.${MODULE_NAME}) fails on calls without a paramerter" {
     run "${TEST_UNDER_EXAMINATION}.bash"
     assert_failure 128
 }

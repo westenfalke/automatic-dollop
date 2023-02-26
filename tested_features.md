@@ -1,7 +1,7 @@
 # Test Report
 ## Tested Features 1..23
-- [x] ok 1 (cli.add_document backingstore='default') add a document to a document_dir 
-- [x] ok 2 (cli.add_document) fails on calls without a paramerter
+- [x] ok 1 (backingstore.default.add_document) add a document to a document_dir 
+- [x] ok 2 (backingstore.default.add_document) fails on calls without a paramerter
 - [x] ok 3 (backingstore.default.add_element) adds one element to a namespaced bucket
 - [x] ok 4 (backingstore.default.add_element) adds two elements to a namespaced bucket
 - [x] ok 5 (backingstore.default.add_element) fails on calls without a paramerter
