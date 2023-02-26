@@ -1,5 +1,5 @@
 # Test Report
-## Tested Features 1..23
+## Tested Features 1..25
 - [x] ok 1 (backingstore.default.add_document) add a document to a document_dir 
 - [x] ok 2 (backingstore.default.add_document) fails on calls without a paramerter
 - [x] ok 3 (backingstore.default.add_element) adds one element to a namespaced bucket
@@ -22,7 +22,9 @@
 - [x] ok 20 (backingstore.default.mkdwn2html) create html from markdown with a title form metadata
 - [x] ok 21 (backingstore.default.mkdwn2html) fails on calls without a paramerter
 - [x] ok 22 (backingstore.default.read_bucket) fails on calls without a paramerter
-- [x] ok 23 (backingstore.default.template) fails on calls without a paramerter
+- [x] ok 23 (backingstore.default.read_document) read a documents content a directory
+- [x] ok 24 (backingstore.default.read_document) fails on calls without a parameter
+- [x] ok 25 (backingstore.default.template) fails on calls without a paramerter
 
 ## Listing files and directories
 ``` bash
@@ -99,8 +101,15 @@
     │   └── mkdwn2html.first_run
     ├── read_bucket
     │   └── read_bucket.first_run
+    ├── read_document
+    │   ├── user
+    │   │   └── maintained
+    │   │       └── documents
+    │   │           └── index.md
+    │   ├── content_to_add.md
+    │   └── read_document.first_run
     └── template
         └── template.first_run
 
-47 directories, 27 files
+51 directories, 30 files
 ```
